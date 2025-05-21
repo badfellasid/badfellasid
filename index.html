@@ -24,6 +24,7 @@
   </h3>
 </a>
 
+
 <style>
 .nav__logo {
   text-decoration: none;
@@ -86,13 +87,13 @@
                             <a href="#home" class="nav__link active-link">Home</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#about" class="nav__link">Madridista</a>
+                            <a href="https://www.realmadrid.com/en-US" class="nav__link">Madridista</a>
                         </li>
                         <li class="nav__item">
                             <a href="https://www.instagram.com/badfellasld?igsh=MWg0Zmh3NDkwa2Foeg%3D%3D&utm_source=qr" class="nav__link">Instagram</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#contact" class="nav__link">Tiktok</a>
+                            <a href="https://www.tiktok.com/@langitkelabu._?is_from_webapp=1&sender_device=pc" class="nav__link">Tiktok</a>
                         </li>
 
                         <i class='bx bx-toggle-left change-theme' id="theme-button"></i>
@@ -105,8 +106,87 @@
 
                 <a href="#" class="button button__header">WELLCOME</a>
             </nav>
-            <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="#"><img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo" style="height: 40px; margin-right: 10px;">
-          <img src="CABECERA_PARCHE_15_nuevo.jpeg" alt="Real Madrid Logo" style="height: 40px; margin-right: 10px;"></i><span class="shimmer-base shimmer-1"></span>  </a>
+            
+<div class="container">
+  <a class="link-dark navbar-brand site-title mb-0" href="#">
+    <div class="logo-wrapper">
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo" class="logo left">
+      <img src="CABECERA_PARCHE_15_nuevo.jpeg" alt="Real Madrid Patch" class="logo right">
+    </div>
+  </a>
+</div>
+
+<style>
+.logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+/* Logo dasar */
+.logo {
+  height: 40px;
+  opacity: 0;
+  position: relative;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Logo kiri */
+.logo.left {
+  animation-name: logoLeft;
+}
+
+/* Logo kanan */
+.logo.right {
+  animation-name: logoRight;
+}
+
+/* Muncul 0-20% (2 detik), Stay 20-60% (4 detik), Keluar 60-80% (2 detik) */
+@keyframes logoLeft {
+  0%   { transform: translateX(-150%); opacity: 0; }
+  20%  { transform: translateX(0); opacity: 1; }
+  60%  { transform: translateX(0); opacity: 1; }
+  80%  { transform: translateX(-150%); opacity: 0; }
+  100% { transform: translateX(-150%); opacity: 0; }
+}
+
+@keyframes logoRight {
+  0%   { transform: translateX(150%); opacity: 0; }
+  20%  { transform: translateX(0); opacity: 1; }
+  60%  { transform: translateX(0); opacity: 1; }
+  80%  { transform: translateX(150%); opacity: 0; }
+  100% { transform: translateX(150%); opacity: 0; }
+}
+
+/* Kilauan */
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.7) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: shimmer 2.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+</style>
+
+
         </header>
 
         <main class="main">
@@ -173,16 +253,121 @@
 
   loop();
 </script> </h1>
+<style>
+  .clock-container {
+    position: relative; /* agar posisi absolut jam mengacu ke container ini */
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .clock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    gap: 6px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: black;
+    background: transparent;
+  }
+
+  .time-segment {
+    position: relative;
+    width: 28px;
+    height: 26px;
+    border: 1.5px solid black;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+  }
+
+  .time-segment span {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    top: 0;
+    line-height: 26px;
+    transition: transform 0.5s ease;
+  }
+
+  .separator {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: bold;
+    color: black;
+  }
+</style>
+
+<div class="clock-container">
+  <div class="clock" id="clock">
+    <div class="time-segment" id="hour-segment">
+      <span id="hour-old">00</span>
+      <span id="hour-new" style="transform: translateY(100%);">00</span>
+    </div>
+    <div class="separator">:</div>
+    <div class="time-segment" id="minute-segment">
+      <span id="minute-old">00</span>
+      <span id="minute-new" style="transform: translateY(100%);">00</span>
+    </div>
+    <div class="separator">:</div>
+    <div class="time-segment" id="second-segment">
+      <span id="second-old">00</span>
+      <span id="second-new" style="transform: translateY(100%);">00</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function slideDownOnly(oldEl, newEl, newValue) {
+    if (oldEl.textContent === newValue) return;
+
+    newEl.textContent = newValue;
+    newEl.style.transform = 'translateY(0)';
+    oldEl.style.transform = 'translateY(-100%)';
+
+    setTimeout(() => {
+      oldEl.textContent = newValue;
+      oldEl.style.transform = 'translateY(0)';
+      newEl.style.transform = 'translateY(100%)';
+    }, 500);
+  }
+
+  function updateSlidingClock() {
+    const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+    const date = new Date(now);
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    slideDownOnly(document.getElementById('hour-old'), document.getElementById('hour-new'), hours);
+    slideDownOnly(document.getElementById('minute-old'), document.getElementById('minute-new'), minutes);
+    slideDownOnly(document.getElementById('second-old'), document.getElementById('second-new'), seconds);
+  }
+
+  setInterval(updateSlidingClock, 1000);
+  updateSlidingClock();
+</script>
+
 
                         <p class="home__description"><p class="shimmer-text">I excel crafting elegant<br> digital experiences <br> and i an proficient in <br> various programming languages and technologies and im is madridista.</p>
 <br>
-                        <a href="#" class="button">Get Started</a>
+                        <a href="https://www.instagram.com/badfellasld?igsh=MWg0Zmh3NDkwa2Foeg%3D%3D&utm_source=qr" class="button">Get Started</a>
                  <section class="spectrum-section">
   <div class="horizontal-spectrum-wrapper">
     <div class="horizontal-bar bar1"></div>
     <div class="horizontal-bar bar2"></div>
   </div>
 </section>
+
 
 <style>
   .spectrum-section {
@@ -296,8 +481,13 @@
             
             <section class="services section container" id="services">
                 <div class="fade-up">
-                <h2 class="section__title">about this <br>my life </h2>
+                  
+                <h2 class="section__title">about this <br>my life <br>
+                  
+                 </h2>
+                
                 </div>
+                
                 <div class="services__container grid">
                     <div class="services__data">
                         <div class="fade-up">
