@@ -71,34 +71,46 @@
              
             </h6>
              
-            <script>
-              const text = "I’m badfellasid  "; // kalimat yang ingin ditulis
-              let i = 0, del = false;
-              const el = document.getElementById("typing-title");
-            
-              function loop() {
-                el.textContent = text.substring(0, i);
-                if (!del && i < text.length) {
-                  i++;
-                } else if (del && i > 0) {
-                  i--;
-                }
-            
-                if (i === text.length) {
-                  del = true;
-                  setTimeout(loop, 1000);
-                  return;
-                }
-            
-                if (i === 0 && del) {
-                  del = false;
-                }
-            
-                setTimeout(loop, del ? 50 : 100);
-              }
-            
-              loop();
-            </script> </h1>
+            <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet" />
+<style>
+  #typing-title {
+    font-size: 40px;
+    font-family: 'Signika', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<h1 id="typing-title"></h1>
+
+<script>
+  const text = "I’m badfellasid  "; // kalimat yang ingin ditulis
+  let i = 0, del = false;
+  const el = document.getElementById("typing-title");
+
+  function loop() {
+    el.textContent = text.substring(0, i);
+    if (!del && i < text.length) {
+      i++;
+    } else if (del && i > 0) {
+      i--;
+    }
+
+    if (i === text.length) {
+      del = true;
+      setTimeout(loop, 1000);
+      return;
+    }
+
+    if (i === 0 && del) {
+      del = false;
+    }
+
+    setTimeout(loop, del ? 50 : 100);
+  }
+
+  loop();
+</script> </h1>
                         <p class="home__description"><p class="shimmer-text">I excel crafting elegant digital experiences and i an proficient in various programming languages and technologies and im is madridista.</p>
 
                         <a href="#" class="button">Get Started</a>
@@ -1554,3 +1566,5 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
 </style>
 </html>
 </style>
+
+                            
