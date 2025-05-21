@@ -209,13 +209,13 @@
     height: 20px;
     width: 100%;
     border-radius: 10px;
-    background: linear-gradient(to right, #ffc107, #fff);
+    background: linear-gradient(to right, #62ff00, #ffffff);
     animation: waveMove 2s ease-in-out infinite;
   }
 
   .bar2 {
     animation-delay: 1s;
-    background: linear-gradient(to right, #fff, #ffc107);
+    background: linear-gradient(to right, #fff, #fffb00);
   }
 
   @keyframes waveMove {
@@ -238,7 +238,21 @@
                 </div>
             </section>
           
-            
+            <div class="hobby-spectrum">
+                  
+                  <audio id="auto-music" autoplay muted loop>
+                    <source src="aa.mp3" type="audio/mp4">
+                    Your browser does not support the audio tag.
+                  </audio>
+                  
+                  <script>
+                    // Aktifkan suara setelah interaksi pertama
+                    window.addEventListener("click", () => {
+                      const audio = document.getElementById("auto-music");
+                      audio.muted = false;
+                      audio.play();
+                    }, { once: true });
+                  </script>
 
             <!--=============== ABOUT ===============-->
             <div class="container">
@@ -1414,12 +1428,12 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
 
 <style>
   .real-footer {
-    background: #ffffff;
+    background: auto #000000,#ffffff ;
     color: #9c9c9c;
     padding: 40px 20px 20px;
     text-align: center;
     font-family: sans-serif;
-    border-top: 3px solid #000000;
+    border-top: 3px solid #ffffff;
   }
 
   .footer-content {
@@ -1430,7 +1444,7 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
   .footer-logo {
     width: 60px;
     margin-bottom: 15px;
-    filter: drop-shadow(0 0 2px #fff);
+    filter: drop-shadow(0 0 2px #000000);
   }
 
   .footer-links {
@@ -1446,15 +1460,16 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
   }
 
   .footer-links a:hover {
-    color: #ffffff;
+    color:auto #ffffff, #000000;
   }
 
   .real-footer p {
     margin-top: 10px;
     font-size: 14px;
-    color: #ccc;
+    color: auto #000000, #ffffff;
   }
-  
+  </style>
+</html>
 </style>
         <!--=============== SCROLL UP ===============-->
         <a href="#" class="scrollup" id="scroll-up">
@@ -1618,10 +1633,10 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
     max-width: 400px;
     margin: 40px auto;
     padding: 20px;
-    border: 1.5px solid #ddd;
+    border: 1.5px solid auto #ffffff, #000000;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(228, 58, 58, 0.08);
-    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
+    background-color: auto #000000, #ffffff;;
     text-align: center;
     font-family: sans-serif;
   }
@@ -1656,10 +1671,10 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
     position: relative;
     width: 220px;
     height: 16px;
-    border: 2px solid #ccc;
+    border: 2px solid auto #000000, #f3f3f3;
     border-radius: 50px;
     overflow: hidden;
-    background: #fff;
+    background: auto #000000, #ffffff;
   }
 
   .straw-fill {
@@ -1682,7 +1697,5 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
     color: #333;
     z-index: 2;
   }
-</style>
-</html>
-</style>
+
  
