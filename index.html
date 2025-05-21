@@ -106,75 +106,7 @@
                     </div>   
                 </div>
             </section>
-            <style>
-                  .world-clock {
-                    font-family: sans-serif;
-                    font-size: 14px;
-                    background: #fff;
-                    border: 1px solid #ccc;
-                    border-radius: 8px;
-                    padding: 10px 16px;
-                    max-width: 300px;
-                    color: #333;
-                  }
-                  .city-time {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 4px;
-                  }
-                  .diff {
-                    text-align: center;
-                    font-size: 12px;
-                    color: #666;
-                  }
-                </style>
-              </head>
-              <div style="margin: 20px 0;"></div>
-              <body>
-              <div style="margin: 20px 0;"></div>
-              <div class="world-clock" id="worldClock">
-                <div class="city-time"><span>Madrid</span><span id="madridTime">00:00:00</span></div>
-                <div class="city-time"><span>Jakarta</span><span id="jakartaTime">00:00:00</span></div>
-                <div class="diff" id="timeDiff">Menghitung...</div>
-              </div>
-              
-              <script>
-                const madridEl = document.getElementById("madridTime");
-                const jakartaEl = document.getElementById("jakartaTime");
-                const diffEl = document.getElementById("timeDiff");
-              
-                function updateClock() {
-                  const now = new Date();
-              
-                  const madrid = new Intl.DateTimeFormat('en-GB', {
-                    timeZone: 'Europe/Madrid',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit',
-                    hour12: false
-                  }).format(now);
-              
-                  const jakarta = new Intl.DateTimeFormat('en-GB', {
-                    timeZone: 'Asia/Jakarta',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit',
-                    hour12: false
-                  }).format(now);
-              
-                  madridEl.textContent = madrid;
-                  jakartaEl.textContent = jakarta;
-              
-                  // Time offset calculation
-                  const madridOffset = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid", timeZoneName: "short" }).split(" ").pop();
-                  const jakartaOffset = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta", timeZoneName: "short" }).split(" ").pop();
-                  const extract = (tz) => parseInt(tz.match(/GMT([+-]\d+)/)?.[1] || 0);
-              
-                  const diff = extract(jakartaOffset) - extract(madridOffset);
-                  diffEl.textContent = diff === 0
-                    ? "Waktu sama"
-                    : `Jakarta ${diff > 0 ? 'lebih cepat' : 'lebih lambat'} ${Math.abs(diff)} jam`;
-                }
-              
-                setInterval(updateClock, 1000);
-                updateClock();
-              </script>
+          
             
 
             <!--=============== ABOUT ===============-->
@@ -209,303 +141,7 @@
 <body>
 
 
-<div class="fade-up">
-                        <h2 class="section__title-center"><span class="shimmer-text">my skill and hobby</h2></span>
-                        <div class="fade-up">
-                        <p class="services__description">Hi, my name is badfellasid. I’m a web developer with a passion for travel and adventure. In my free time, I love going on road trips, capturing moments through photography, and exploring the outdoors as a backpacker. Camping in nature helps me recharge and find inspiration for my creative projects. These experiences not only fuel my love for adventure but also sharpen my skills in observation, problem-solving, and storytelling through code and visuals.</p>
-                        <div>
-                        
-                    </div>
 
-                <div class="hobby-wrapper">
-  <h2 class="hobby-title"></h2>
-<div class="fade-up">
-  <section class="hobby-straws">
-    <div class="straw-hobby" data-percent="95">
-      <span class="hobby-label"> webdeveloper</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">90%</span>
-      </div>
-    </div>
-
-    <div class="straw-hobby" data-percent="90">
-      <span class="hobby-label">roadtripper</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">99%</span>
-      </div>
-    </div>
-
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> Photography</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
-      </div>
-    </div>
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> backpackeran</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
-      </div>
-    </div>
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> nature camp</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
-      </div>
-    </div>
-  </section>
-</div>
-</div>
-
-<style>
-  .hobby-wrapper {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1.5px solid #ddd;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-    text-align: center;
-    font-family: sans-serif;
-  }
-
-  .hobby-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .hobby-straws {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .straw-hobby {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-  }
-
-  .hobby-label {
-    width: 90px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: right;
-  }
-
-  .straw {
-    position: relative;
-    width: 220px;
-    height: 16px;
-    border: 2px solid #ccc;
-    border-radius: 50px;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .straw-fill {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(to right, #fff176 0%, #fbc02d 100%);
-    transition: width 0.5s ease-in-out;
-  }
-
-  .straw-percent {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-    font-weight: 700;
-    color: #ff0000;
-    z-index: 2;
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".straw-hobby").forEach(el => {
-      const maxPercent = parseInt(el.dataset.percent);
-      const fill = el.querySelector(".straw-fill");
-      const text = el.querySelector(".straw-percent");
-
-      let direction = 1; // 1 = naik, -1 = turun
-      let current = 0;
-
-      function animate() {
-        fill.style.width = `${current}%`;
-        text.textContent = `${current}%`;
-
-        if (direction === 1) {
-          current += 1;
-          if (current >= maxPercent) direction = -1;
-        } else {
-          current -= 1;
-          if (current <= Math.floor(maxPercent / 2)) direction = 1;
-        }
-
-        setTimeout(() => requestAnimationFrame(animate), 30);
-      }
-
-      animate();
-    });
-  });
-</script>
-                        <defs>
-                        <clipPath id="clip0">
-                        <rect width="312" height="236" fill="white"/>
-                        </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-            </section>
-
-            <!--=============== SECURITY ===============-->
-            <section class="security section container">
-                <div class="security__container grid">
-                    <div class="security__data">
-                        <div class="fade-up">
-                         <h2 class="section__title-center"><span class="shimmer-text">prediksi juara ucl</h2>
-                        
-                            <div class="fade-up">
-                        <p class="services__description">AUsai laga perempatfinal Liga Champions 2024-2025 rampung digelar, superkomputer AceOdds pun membuat prediksi juara Liga Champions 2024-2025. Hasil mengejutkan keluar. Superkomputer itu memprediksi Paris Saint-Germain (PSG) yang jadi kandidat terkuat juara Liga Champions musim ini</p>
-                        <div>
-                    </div>
-                <div class="hobby-wrapper">
-  <h2 class="hobby-title"></h2>
-<section class="hobby-straws">
-    <div class="straw-hobby" data-percent="95">
-      <span class="hobby-label"> Inter Milan</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">20.9%</span>
-      </div>
-    </div>
-
-    <div class="straw-hobby" data-percent="90">
-      <span class="hobby-label">paris saint germain (PSG)</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">38.2%</span>
-      </div>
-    </div>
-
-</div>
-  </section>
-</div>
-
-
-<style>
-  .hobby-wrapper {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1.5px solid #ddd;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(228, 58, 58, 0.08);
-    background-color: #fff;
-    text-align: center;
-    font-family: sans-serif;
-  }
-
-  .hobby-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .hobby-straws {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .straw-hobby {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-  }
-
-  .hobby-label {
-    width: 90px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: right;
-  }
-
-  .straw {
-    position: relative;
-    width: 220px;
-    height: 16px;
-    border: 2px solid #ccc;
-    border-radius: 50px;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .straw-fill {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(to right, #fff176 0%, #fbc02d 100%);
-    transition: width 0.5s ease-in-out;
-  }
-
-  .straw-percent {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-    font-weight: 700;
-    color: #333;
-    z-index: 2;
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".straw-hobby").forEach(el => {
-      const maxPercent = parseInt(el.dataset.percent);
-      const fill = el.querySelector(".straw-fill");
-      const text = el.querySelector(".straw-percent");
-
-      let direction = 1; // 1 = naik, -1 = turun
-      let current = 0;
-
-      function animate() {
-        fill.style.width = `${current}%`;
-        text.textContent = `${current}%`;
-
-        if (direction === 1) {
-          current += 1;
-          if (current >= maxPercent) direction = -1;
-        } else {
-          current -= 1;
-          if (current <= Math.floor(maxPercent / 2)) direction = 1;
-        }
-
-        setTimeout(() => requestAnimationFrame(animate), 30);
-      }
-
-      animate();
-    });
-  });
-</script>
 
                     
                
@@ -1240,7 +876,92 @@ Travel changes how we see the world, and adventure gives life its true color.</p
                     </div>
                 </div>
             </section>
+            <br>
+            <div class="fade-up">
+                        <h2 class="section__title-center"><span class="shimmer-text">my skill and hobby</h2></span>
+                        <div class="fade-up">
+                          
+                        <p class="services__description">Hi, my name is badfellasid. I’m a web developer with a passion for travel and adventure. In my free time, I love going on road trips, capturing moments through photography, and exploring the outdoors as a backpacker. Camping in nature helps me recharge and find inspiration for my creative projects. These experiences not only fuel my love for adventure but also sharpen my skills in observation, problem-solving, and storytelling through code and visuals.</p>
+                        <div>
+                        
+                    </div>
 
+                <div class="hobby-wrapper">
+  <h2 class="hobby-title"></h2>
+<div class="fade-up">
+  <section class="hobby-straws">
+    <div class="straw-hobby" data-percent="95">
+      <span class="hobby-label"> webdeveloper</span>
+      <div class="straw">
+        <div class="straw-fill"></div>
+        <span class="straw-percent">90%</span>
+      </div>
+    </div>
+
+    <div class="straw-hobby" data-percent="90">
+      <span class="hobby-label">roadtripper</span>
+      <div class="straw">
+        <div class="straw-fill"></div>
+        <span class="straw-percent">99%</span>
+      </div>
+    </div>
+
+    <div class="straw-hobby" data-percent="80">
+      <span class="hobby-label"> Photography</span>
+      <div class="straw">
+        <div class="straw-fill"></div>
+        <span class="straw-percent">60%</span>
+      </div>
+    </div>
+    <div class="straw-hobby" data-percent="80">
+      <span class="hobby-label"> backpackeran</span>
+      <div class="straw">
+        <div class="straw-fill"></div>
+        <span class="straw-percent">60%</span>
+      </div>
+    </div>
+    <div class="straw-hobby" data-percent="80">
+      <span class="hobby-label"> nature camp</span>
+      <div class="straw">
+        <div class="straw-fill"></div>
+        <span class="straw-percent">60%</span>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".straw-hobby").forEach(el => {
+      const maxPercent = parseInt(el.dataset.percent);
+      const fill = el.querySelector(".straw-fill");
+      const text = el.querySelector(".straw-percent");
+
+      let direction = 1; // 1 = naik, -1 = turun
+      let current = 0;
+
+      function animate() {
+        fill.style.width = `${current}%`;
+        text.textContent = `${current}%`;
+
+        if (direction === 1) {
+          current += 1;
+          if (current >= maxPercent) direction = -1;
+        } else {
+          current -= 1;
+          if (current <= Math.floor(maxPercent / 2)) direction = 1;
+        }
+
+        setTimeout(() => requestAnimationFrame(animate), 30);
+      }
+
+      animate();
+    });
+  });
+</script>
             <!--=============== APP ===============-->
             <section class="app section container">
                 <div class="app__container grid">
@@ -1649,6 +1370,187 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
   });
 </script>
     </body>
-    
+    <style>
+  .hobby-wrapper {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1.5px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  .hobby-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .hobby-straws {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .straw-hobby {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .hobby-label {
+    width: 90px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .straw {
+    position: relative;
+    width: 220px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .straw-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #fff176 0%, #fbc02d 100%);
+    transition: width 0.5s ease-in-out;
+  }
+
+  .straw-percent {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff0000;
+    z-index: 2;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".straw-hobby").forEach(el => {
+      const maxPercent = parseInt(el.dataset.percent);
+      const fill = el.querySelector(".straw-fill");
+      const text = el.querySelector(".straw-percent");
+
+      let direction = 1; // 1 = naik, -1 = turun
+      let current = 0;
+
+      function animate() {
+        fill.style.width = `${current}%`;
+        text.textContent = `${current}%`;
+
+        if (direction === 1) {
+          current += 1;
+          if (current >= maxPercent) direction = -1;
+        } else {
+          current -= 1;
+          if (current <= Math.floor(maxPercent / 2)) direction = 1;
+        }
+
+        setTimeout(() => requestAnimationFrame(animate), 30);
+      }
+
+      animate();
+    });
+  });
+</script>
+                        <defs>
+                        <clipPath id="clip0">
+                        <rect width="312" height="236" fill="white"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </section>
+            <section class="security section container">
+                <div class="security__container grid">
+                    <div class="security__data">
+                        <div class="fade-up">
+<style>
+  .hobby-wrapper {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1.5px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(228, 58, 58, 0.08);
+    background-color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  .hobby-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .hobby-straws {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .straw-hobby {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .hobby-label {
+    width: 90px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .straw {
+    position: relative;
+    width: 220px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .straw-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #fff176 0%, #fbc02d 100%);
+    transition: width 0.5s ease-in-out;
+  }
+
+  .straw-percent {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    z-index: 2;
+  }
+</style>
 </html>
 </style>
