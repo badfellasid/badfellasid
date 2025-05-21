@@ -10,7 +10,7 @@
         <!--=============== CSS ===============-->
         <link rel="stylesheet" href="styles.css">
 
-        <title>Responsive website delivery</title>
+        <title>badfellasid</title>
     </head>
     <body>
         <!--=============== HEADER ===============-->
@@ -18,7 +18,67 @@
         <header class="header" id="header">
             <nav class="nav container">
                 
-                <a href="#" class="nav__logo"><h3>BADFELLASID</h3> </a>
+               <a href="#" class="nav__logo">
+  <h3>
+    <span class="nav-text-left">BAD</span><span class="nav-text-right">FELLASID</span>
+  </h3>
+</a>
+
+<style>
+.nav__logo {
+  text-decoration: none;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: black;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nav__logo h3 {
+  margin: 0;
+  display: flex;
+  gap: 4px;
+}
+
+/* Text pieces */
+.nav-text-left,
+.nav-text-right {
+  display: inline-block;
+  animation: slideBoth 4s ease-in-out infinite;
+}
+
+/* Unified animation for both sides */
+@keyframes slideBoth {
+  0% {
+    transform: translateX(var(--start));
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--start));
+    opacity: 0;
+  }
+}
+
+/* Custom directions using CSS variables */
+.nav-text-left {
+  --start: -100%;
+}
+
+.nav-text-right {
+  --start: 100%;
+}
+</style>
+
 
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
@@ -52,15 +112,16 @@
         <main class="main">
             <!--=============== HOME ===============-->
             
+            
             <section class="home section" id="home">
                 <div class="home__container container grid">
                     
                 <div style="display: flex; align-items: center;">
                     <div class="home__data">
-                        
-                        <h1 class="home__title"></script>
+                         <class="home__title"></script>
                             
-        
+
+
 
            <br><div class="col-lg-6">
           <div class="mt-5">
@@ -72,6 +133,7 @@
             </h6>
              
             <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet" />
+
 <style>
   #typing-title {
     font-size: 40px;
@@ -111,10 +173,67 @@
 
   loop();
 </script> </h1>
-                        <p class="home__description"><p class="shimmer-text">I excel crafting elegant digital experiences and i an proficient in various programming languages and technologies and im is madridista.</p>
 
+                        <p class="home__description"><p class="shimmer-text">I excel crafting elegant<br> digital experiences <br> and i an proficient in <br> various programming languages and technologies and im is madridista.</p>
+<br>
                         <a href="#" class="button">Get Started</a>
-                 
+                 <section class="spectrum-section">
+  <div class="horizontal-spectrum-wrapper">
+    <div class="horizontal-bar bar1"></div>
+    <div class="horizontal-bar bar2"></div>
+  </div>
+</section>
+
+<style>
+  .spectrum-section {
+    width: 100%;
+    padding: 40px 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .horizontal-spectrum-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    pointer-events: none; /* Tidak mengganggu elemen lain */
+  }
+
+  .horizontal-bar {
+    height: 20px;
+    width: 100%;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ffc107, #fff);
+    animation: waveMove 2s ease-in-out infinite;
+  }
+
+  .bar2 {
+    animation-delay: 1s;
+    background: linear-gradient(to right, #fff, #ffc107);
+  }
+
+  @keyframes waveMove {
+    0% {
+      transform: scaleX(0.3);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(0.3);
+      opacity: 0.7;
+    }
+  }
+</style>
+
                     </div>   
                 </div>
             </section>
@@ -132,7 +251,7 @@
     .shimmer-text {
       font-size: 1.2em;
       font-weight: normal;
-      background: linear-gradient(to right, #ffffff 20%, #ffffff 40%, #000000 60%);
+      background: linear-gradient(to right, #000000 20%, #ffffff 40%, #000000 60%);
       background-size: 200% auto;
       color: transparent;
       background-clip: text;
@@ -1566,5 +1685,4 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
 </style>
 </html>
 </style>
-
-                            
+ 
