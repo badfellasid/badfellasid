@@ -26,8 +26,7 @@
   display: block;
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
   pointer-events: none;
-">
-
+"> 
 
 <style>
 .nav__logo {
@@ -354,7 +353,141 @@ various programming languages and technologies and im is madridista.</span>
         </p>
         <button style="background: orange; border: none; padding: 15px 30px; border-radius: 25px; color: white; font-weight: bold; font-size: 1rem; cursor: pointer;">get started</button>
       </div>
-      <!-- Image -->
+      <!-- Image --><style>
+  #my-stats-widget {
+    display: flex;
+    gap: 1.2rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0 0 0 / 0.6);
+    max-width: 320px;
+    justify-content: center;
+    user-select: none;
+    background: transparent;
+    isolation: isolate;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #my-stats-widget .stat-item {
+    text-align: center;
+    min-width: 70px;
+  }
+  #my-stats-widget .stat-item p {
+    margin: 0 0 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+  #my-stats-widget .stat-item h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div id="my-stats-widget">
+  <div class="stat-item">
+    <p>Instagram</p>
+    <h2 id="followers">0+</h2>
+  </div>
+  <div class="stat-item">
+    <p>TikTok</p>
+    <h2 id="subscribers">0+</h2>
+  </div>
+  <div class="stat-item">
+    <p>Kunjungan</p>
+    <h2 id="sales">0+</h2>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCSBe-Iibevmk9d-TTt0IyEuOSPeW6ZQ78",
+    authDomain: "webs-cceea.firebaseapp.com",
+    projectId: "webs-cceea",
+    storageBucket: "webs-cceea.firebasestorage.app",
+    messagingSenderId: "1034998048496",
+    appId: "1:1034998048496:web:37d75a3d72f2b3abb24435",
+    measurementId: "G-VBC4B5F8BK"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const visitRef = db.ref("visits");
+
+  // Increment visits safely on load
+  visitRef.transaction(current => (current || 0) + 1);
+
+  function animateValue(el, start, end, duration = 1000) {
+    const range = end - start;
+    let startTime = null;
+    function step(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      el.textContent = Math.floor(start + range * progress) + '+';
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counters = {
+    followers: { el: document.getElementById('followers'), value: 10000 },
+    subscribers: { el: document.getElementById('subscribers'), value: 7000 },
+    sales: { el: document.getElementById('sales'), value: 700 }
+  };
+
+  // Update colors based on background brightness
+  function updateColors() {
+    const container = document.getElementById('my-stats-widget');
+    const style = getComputedStyle(container);
+    const bgColor = style.backgroundColor;
+
+    // Parse rgb or rgba color string
+    const rgb = bgColor.match(/\d+/g);
+    if (!rgb) return;
+
+    const r = parseInt(rgb[0]);
+    const g = parseInt(rgb[1]);
+    const b = parseInt(rgb[2]);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Text color: black on light bg, white on dark bg
+    const textColor = luminance > 0.5 ? '#000' : '#fff';
+
+    container.querySelectorAll('p, h2').forEach(el => {
+      el.style.color = textColor;
+      el.style.textShadow = textColor === '#000' ? '0 0 3px rgba(255,255,255,0.7)' : '0 0 3px rgba(0,0,0,0.7)';
+    });
+  }
+
+  function updateStats() {
+    ['followers', 'subscribers'].forEach(key => {
+      const current = counters[key];
+      const newValue = current.value + Math.floor(Math.random() * 30);
+      animateValue(current.el, parseInt(current.el.textContent) || 0, newValue);
+      current.value = newValue;
+    });
+  }
+
+  updateStats();
+  setInterval(updateStats, 3000);
+
+  visitRef.on("value", snapshot => {
+    const count = snapshot.val() || 0;
+    const salesEl = counters.sales.el;
+    animateValue(salesEl, parseInt(salesEl.textContent) || 0, count);
+    counters.sales.value = count;
+  });
+
+  updateColors();
+  setInterval(updateColors, 2000);
+</script>
       <div>
         
       </div>
