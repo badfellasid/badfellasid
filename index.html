@@ -570,12 +570,165 @@ various programming languages and technologies and im is madridista.</span>
 
 
             <!--=============== SERVICES ===============-->
-            
+            <div class="quote-component">
+  <div class="quote-container">
+    <div class="quote-box">
+      <p class="quote-text">"The real madrid shirt is white.
+You can cover it in mud, sweat or blood. But never shame"</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quote-component .quote-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  .quote-component .quote-box {
+    position: relative;
+    max-width: 320px;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+
+    border: 2px solid black;
+    box-shadow:
+      0 0 8px rgba(0, 200, 255, 0.7),  /* Neon light blue shadow */
+      0 0 6px white,
+      0 0 6px black;
+
+    background: transparent;
+    color: var(--text-color, #222);
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    overflow: hidden;
+  }
+
+  .quote-component .quote-text {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-component .quote-text::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%;
+    width: 250%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    animation: shimmer-horizontal 2.5s infinite;
+    pointer-events: none;
+    filter: brightness(1.2) blur(1px);
+    mix-blend-mode: screen;
+    z-index: 1;
+  }
+
+  @keyframes shimmer-horizontal {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 150%;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .quote-component .quote-box {
+      border: 2px solid white;
+      box-shadow:
+        0 0 8px rgba(255, 247, 0, 0.8),  /* Neon blue for dark mode */
+        0 0 4px black,
+        0 0 6px white;
+      color: var(--text-color, #eee);
+    }
+
+    .quote-component .quote-text::before {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.941) 0%,
+        rgb(162, 162, 162) 50%,
+        rgb(0, 0, 0) 100%
+      );
+    }
+  }
+</style>
+
             <section class="services section container" id="services">
                 <div class="fade-up">
                   
-                <h2 class="section__title"><span class="shimmer-small-text">about <br>my life <br></span>
-                  
+                <h2 class="section__title"><span class="shimmer-small-text"></span>
+<style>
+  .title-overlay {
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .shimmer-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 8px;
+    background: transparent !important;
+  }
+
+  .shimmer-wrapper img {
+    display: block;
+    height: 80px;
+    width: auto;
+    border-radius: 8px;
+    background: transparent !important;
+  }
+
+.shimmer-wrapper::before {
+  content: "";
+  position: absolute;
+  bottom: -150%;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 70%,
+  rgba(0, 0, 0, 0.5) 30%,  /* titik terang lebih sempit */
+  rgba(0, 0, 0, 0) 70%
+);
+
+  animation: shimmer-vertical 2s infinite;
+  pointer-events: none;
+}
+
+
+  @keyframes shimmer-vertical {
+    0% {
+      bottom: -150%;
+    }
+    100% {
+      bottom: 150%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="title-overlay">
+  <div class="shimmer-wrapper">
+    <img src="erasebg-transformed (2).png" alt="My Skill" />
+  </div>
+</div>
+
+
                  </h2>
                 
                 </div>
@@ -1305,21 +1458,78 @@ Travel changes how we see the world, and adventure gives life its true color.</p
             </section>
             <br>
             <div class="services__data">
-                        <div class="fade-up">
-                      
-                        </div>
-                        <div class="fade-up">
-                        </div>
-            <div class="fade-up">
-                        <h2 class="section__title-center"><span class="shimmer-text"><span class="shimmer-small-text">my skill and hobby</h2></span></span>
-                        <div class="fade-up">
-                          
-                        <p class="services__description">Hi, my name is badfellasid. I’m a web developer with a passion for travel and adventure. In my free time, I love going on road trips, capturing moments through photography, and exploring the outdoors as a backpacker. Camping in nature helps me recharge and find inspiration for my creative projects. These experiences not only fuel my love for adventure but also sharpen my skills in observation, problem-solving, and storytelling through code and visuals.</p>
+                       
+
+<div style="display: flex; justify-content: center; align-items: center; padding: 1rem 0; position: relative; width: fit-content; margin: 0 auto;">
+  <img src="erasebg-transformed (1).png" alt="Judul Konten" style="
+    width: 120px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  ">
+  <div style="
+    position: absolute;
+    top: 30px;  /* setengah dari tinggi gambar (120px / 2) - setengah tinggi shimmer */
+    left: 0;
+    width: 120px;
+    height: 60px; /* setengah dari gambar */
+    z-index: 2; /* harus lebih besar dari gambar */
+    pointer-events: none;
+    background: linear-gradient(
+      120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.5) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmerMove 2.5s infinite;
+    filter: blur(4px);
+    mix-blend-mode: screen;
+    border-radius: 8px;
+  ">
+  </div>
+</div>
+
+<style>
+@keyframes shimmerMove {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+</style>
+
+                        <p class="services__description"><!-- Link Google Fonts tetap di <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+<!-- Wrapper container supaya teks berada di tengah dan tidak mempengaruhi layout lain -->
+<div style="display: flex; justify-content: center; padding: 0.5rem 0; width: 100%; box-sizing: border-box;">
+  <span style="
+    text-align: left;
+    display: inline-block;
+    max-width: 400px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+    font-family: 'Dancing Script', cursive;
+    color:auto #333, #ffffff;
+    padding-bottom: 0.2rem;
+    box-sizing: border-box;
+  ">
+    Hi, my name is badfellasid. I’m a web developer with a passion for travel and adventure. In my free time,I love going on road trips, capturing moments through photography, and exploring the outdoors as a backpacker.
+  </span>
+</div>  Camping in nature helps me recharge and find inspiration for my creative projects.
+ These experiences not only fuel my love for adventure but also sharpen my skills in observation, problem-solving, and storytelling through code and visuals.</p>
                         <div>
                         
                     </div>
 
                 <div class="hobby-wrapper">
+                  
   <h2 class="hobby-title"></h2>
 <div class="fade-up">
   <section class="hobby-straws">
@@ -1682,8 +1892,67 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
                 <div class="contact__container grid">
                     <div class="contact__content">
                         <div class="fade-up">
-                          
-                        <h2 class="section__title-center"><div class="fade-up"><span class="shimmer-small-text">Contact Us From <br> Here</h2></div></span>
+                          <style>
+  .title-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .shimmer-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 8px;
+    background: transparent !important;
+  }
+
+  .shimmer-wrapper img {
+    display: block;
+    height: 120px;
+    width: auto;
+    border-radius: 8px;
+    background: transparent !important;
+  }
+
+  .shimmer-wrapper::before {
+    content: "";
+    position: absolute;
+    bottom: -150%;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer-vertical 2s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmer-vertical {
+    0% {
+      bottom: -150%;
+    }
+    100% {
+      bottom: 150%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="title-overlay">
+  <div class="shimmer-wrapper">
+    <img src="erasebg-transformed.png" alt="My Skill" />
+  </div>
+</div>
+                        <h2 class="section__title-center"><div class="fade-up"><span class="shimmer-small-text"></h2></div></span>
                         <p class="contact__description">You can contact us from here, you can write to us, 
                             call us or visit our service center, we will gladly assist you.</p>
                     </div>
