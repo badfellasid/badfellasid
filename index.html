@@ -89,6 +89,7 @@
                         <li class="nav__item">
                             <a href="#home" class="nav__link active-link">Home</a>
                         </li>
+                        
                         <li class="nav__item">
                             <a href="https://www.realmadrid.com/en-US" class="nav__link">Madridista</a>
                         </li>
@@ -98,12 +99,266 @@
                         <li class="nav__item">
                             <a href="https://www.tiktok.com/@langitkelabu._?is_from_webapp=1&sender_device=pc" class="nav__link">Tiktok</a>
                         </li>
-
+                        
                         <i class='bx bx-toggle-left change-theme' id="theme-button"></i>
+                        <style>
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    cursor: pointer;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+  .slider {
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background: transparent;
+    border-radius: 14px;
+  }
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 0;
+    bottom: 0;
+    background-color: #888;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  input:checked + .slider::before {
+    transform: translateX(14px);
+    background-color: #4CAF50;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+  }
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1e1e2f;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    width: 450px;
+    max-width: 90vw;
+    max-height: 70vh;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .window-header {
+    background-color: #2b2b3d;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: relative;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .dot.red { background-color: #ff5f56; }
+  .dot.yellow { background-color: #ffbd2e; }
+  .dot.green { background-color: #27c93f; }
+
+  .close-btn {
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    font-size: 22px;
+    color: #d4d4d4;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+  }
+  .close-btn:hover { color: #ff5f56; }
+
+  .screen {
+    padding: 1rem;
+    height: 260px;
+    overflow: hidden;
+    color: #d4d4d4;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+  }
+  .screen-content {
+    display: flex;
+    flex-direction: column;
+  }
+.ascii-art {
+  font-size: 0.5em;
+  line-height: 1;
+  white-space: pre;
+}
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background: #d4d4d4;
+    animation: blink 1s step-end infinite;
+    vertical-align: bottom;
+    height: 1em;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .keyword { color: #ff79c6; }
+  .function { color: #8be9fd; }
+  .string { color: #f1fa8c; }
+  .normal { color: #f8f8f2; }
+</style>
+</head>
+<body>
+
+<label class="switch" aria-label="Toggle modal">
+  <input type="checkbox" id="toggleSwitch" />
+  <span class="slider"></span>
+</label>
+
+<div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <div class="window-header" id="modalTitle">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="close-btn" id="closeBtn" aria-label="Close modal">&times;</span>
+    </div>
+    <div class="screen">
+      <pre id="typing" class="screen-content"></pre><span class="cursor"></span>
+    </div>
+  </div>
+</div>
+
+<audio id="typeSound" src="" preload="auto"></audio>
+
+<script>
+  const toggleSwitch = document.getElementById('toggleSwitch');
+  const modal = document.getElementById('myModal');
+  const typingEl = document.getElementById('typing');
+  const closeBtn = document.getElementById('closeBtn');
+  const typeSound = document.getElementById('typeSound');
+
+  const codeContent = [
+  `<span class="keyword">&lt;?php</span>`,
+  `<span class="keyword">function</span> <span class="function">hack</span>() {`,
+  `  $data = $_POST[<span class="string">"password"</span>];`,
+  `  <span class="keyword">if</span> ($data === <span class="string">"admin"</span>) {`,
+  `    echo <span class="string">"Access Granted!"</span>;`,
+  `  } <span class="keyword">else</span> {`,
+  `    echo <span class="string">"Access Denied!"</span>;`,
+  `  }`,
+  `}`,
+  `<span class="function">hack</span>();`,
+  ``,
+  `// Initiating system checks...`,
+  `<span class="function">system_check</span>();`,
+  ``,
+  `<span class="keyword">function</span> <span class="function">system_check</span>() {`,
+  `  $firewall = <span class="keyword">true</span>;`,
+  `  <span class="keyword">if</span> ($firewall) {`,
+  `    echo <span class="string">"Firewall Active\\n"</span>;`,
+  `  } <span class="keyword">else</span> {`,
+  `    echo <span class="string">"Firewall Disabled\\n"</span>;`,
+  `  }`,
+  `}`,
+  ``,
+  `// Access status:`,
+  `echo <span class="string">"ASCII Access Granted"</span>;`,
+  ``,
+  `<pre class="ascii-art">`,
+  `░██████╗░██╗████████╗░█████╗░`,
+  `██╔════╝░██║╚══██╔══╝██╔══██╗`,
+  `██║░░██╗░██║░░░██║░░░███████║`,
+  `██║░░╚██╗██║░░░██║░░░██╔══██║`,
+  `╚██████╔╝██║░░░██║░░░██║░░██║`,
+  `░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░░╚═╝`,
+  ``,
+  `░██╗░░░░░░░██╗░█████╗░███╗░░██╗██████╗░░█████╗░`,
+  `░██║░░██╗░░██║██╔══██╗████╗░██║██╔══██╗██╔══██╗`,
+  `░╚██╗████╗██╔╝███████║██╔██╗██║██║░░██║███████║`,
+  `░░████╔═████║░██╔══██║██║╚████║██║░░██║██╔══██║`,
+  `░░╚██╔╝░╚██╔╝░██║░░██║██║░╚███║██████╔╝██║░░██║`,
+  `░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝`,
+  `</pre>`
+];
+
+
+
+  let lineIndex = 0;
+  let typingInterval;
+
+  function startTyping() {
+    typingEl.innerHTML = '';
+    lineIndex = 0;
+    clearInterval(typingInterval);
+
+    const maxLines = 15;
+
+    typingInterval = setInterval(() => {
+      if (lineIndex >= codeContent.length) {
+        clearInterval(typingInterval);
+        setTimeout(startTyping, 2000); // Loop setelah selesai
+        return;
+      }
+
+      const lineDiv = document.createElement('div');
+      lineDiv.innerHTML = codeContent[lineIndex];
+
+      if (typeSound) {
+        typeSound.currentTime = 0;
+        typeSound.play();
+      }
+
+      typingEl.appendChild(lineDiv);
+      lineIndex++;
+
+      while (typingEl.children.length > maxLines) {
+        typingEl.removeChild(typingEl.firstChild);
+      }
+    }, 100);
+  }
+
+  toggleSwitch.addEventListener('change', () => {
+    if (toggleSwitch.checked) {
+      modal.style.display = 'block';
+      startTyping();
+    } else {
+      modal.style.display = 'none';
+      clearInterval(typingInterval);
+      typingEl.innerHTML = '';
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    toggleSwitch.checked = false;
+    clearInterval(typingInterval);
+    typingEl.innerHTML = '';
+  });
+</script>
                     </ul>
                 </div>
 
                 <div class="nav__toggle" id="nav-toggle">
+                  
                     <i class='bx bx-grid-alt'></i>
                 </div>
 
@@ -115,6 +370,7 @@
     <div class="logo-wrapper">
       <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo" class="logo left">
       <img src="CABECERA_PARCHE_15_nuevo.jpeg" alt="Real Madrid Patch" class="logo right">
+      
     </div>
   </a>
 </div>
@@ -193,6 +449,7 @@
         </header>
 
         <main class="main">
+          
             <!--=============== HOME ===============-->
             
             <body style="margin: 90; font-family: 'Segoe UI', sans-serif;">
