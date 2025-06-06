@@ -259,11 +259,11 @@
   const codeContent = [
   `<span class="keyword">&lt;?php</span>`,
   `<span class="keyword">function</span> <span class="function">hack</span>() {`,
-  `  $data = $_POST[<span class="string">"password"</span>];`,
-  `  <span class="keyword">if</span> ($data === <span class="string">"admin"</span>) {`,
-  `    echo <span class="string">"Access Granted!"</span>;`,
+  `  $data = $_POST[<span class="string">"Gita"</span>];`,
+  `  <span class="keyword">if</span> ($data === <span class="string">"wanda"</span>) {`,
+  `    echo <span class="string">"Access Berhasil!"</span>;`,
   `  } <span class="keyword">else</span> {`,
-  `    echo <span class="string">"Access Denied!"</span>;`,
+  `    echo <span class="string">"Access Gagal!"</span>;`,
   `  }`,
   `}`,
   `<span class="function">hack</span>();`,
@@ -274,14 +274,14 @@
   `<span class="keyword">function</span> <span class="function">system_check</span>() {`,
   `  $firewall = <span class="keyword">true</span>;`,
   `  <span class="keyword">if</span> ($firewall) {`,
-  `    echo <span class="string">"Firewall Active\\n"</span>;`,
+  `    echo <span class="string">"Hack cinta Diaktifkan\\n"</span>;`,
   `  } <span class="keyword">else</span> {`,
-  `    echo <span class="string">"Firewall Disabled\\n"</span>;`,
+  `    echo <span class="string">"Hack cinta Dimatikan\\n"</span>;`,
   `  }`,
   `}`,
   ``,
   `// Access status:`,
-  `echo <span class="string">"ASCII Access Granted"</span>;`,
+  `echo <span class="string">"if perasaan terhack, else tampil couple"</span>;`,
   ``,
   `<pre class="ascii-art">`,
   `░██████╗░██╗████████╗░█████╗░`,
@@ -654,7 +654,7 @@ various programming languages and technologies and im is madridista.</span>
   </div>
   <div class="stat-item">
     <p>Kunjungan</p>
-    <h2 id="sales">0+</h2>
+    <h2 id="sales">9999+</h2>
   </div>
 </div>
 
@@ -696,7 +696,7 @@ various programming languages and technologies and im is madridista.</span>
   const counters = {
     followers: { el: document.getElementById('followers'), value: 10000 },
     subscribers: { el: document.getElementById('subscribers'), value: 7000 },
-    sales: { el: document.getElementById('sales'), value: 700 }
+    sales: { el: document.getElementById('sales'), value:  0},
   };
 
   // Update colors based on background brightness
@@ -870,11 +870,11 @@ const colors = {
 const codeLines = [
   '<?php',
   'function hack() {',
-  '  $data = $_POST["password"];',
-  '  if ($data === "admin") {',
-  '    echo "Access Granted!";',
+  '  $data = $_POST["badfellasid"];',
+  '  if ($data === "nopassword") {',
+  '    echo "Access berhasil!";',
   '  } else {',
-  '    echo "Access Denied!";',
+  '    echo "Access gagal!";',
   '  }',
   '}',
   'hack();',
@@ -883,20 +883,21 @@ const codeLines = [
   'function system_check() {',
   '  $firewall = true;',
   '  if ($firewall) {',
-  '    echo "Firewall Active\\n";',
+  '    echo "Firewall Diaktifkan\\n";',
   '  } else {',
-  '    echo "Firewall Disabled\\n";',
+  '    echo "Firewall Dimatikan\\n";',
   '  }',
   '}',
-  'echo "ASCII Access Granted";',
+  'echo "berhasil masuk, wellcome";',
   '',
-  '        _ _        ',
-  '   __ _(_| |_ __ _ ',
-  '  / _` | | __/ _` |',
-  ' | (_| | | || (_| |',
-  '  \\__, |_|\\__\\__,_|',
-  '  |___/            '
+  '░██████╗░██╗████████╗░█████╗░',
+  '██╔════╝░██║╚══██╔══╝██╔══██╗',
+  '██║░░██╗░██║░░░██║░░░███████║',
+  '██║░░╚██╗██║░░░██║░░░██╔══██║',
+  '╚██████╔╝██║░░░██║░░░██║░░██║',
+  '░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░░╚═╝'
 ];
+
 
 function getColorForWord(word) {
   const keywords = ['function','if','else','return','echo','<?php','true','false'];
