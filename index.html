@@ -101,259 +101,7 @@
                         </li>
                         
                         <i class='bx bx-toggle-left change-theme' id="theme-button"></i>
-                        <style>
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 28px;
-    height: 14px;
-    cursor: pointer;
-  }
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-  }
-  .slider {
-    position: absolute;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
-    background: transparent;
-    border-radius: 14px;
-  }
-  .slider::before {
-    content: "";
-    position: absolute;
-    height: 14px;
-    width: 14px;
-    left: 0;
-    bottom: 0;
-    background-color: #888;
-    border-radius: 50%;
-    transition: 0.3s;
-  }
-  input:checked + .slider::before {
-    transform: translateX(14px);
-    background-color: #4CAF50;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(4px);
-  }
-  .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #1e1e2f;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    width: 450px;
-    max-width: 90vw;
-    max-height: 70vh;
-    overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
-  }
-  .window-header {
-    background-color: #2b2b3d;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    position: relative;
-  }
-  .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
-  .dot.red { background-color: #ff5f56; }
-  .dot.yellow { background-color: #ffbd2e; }
-  .dot.green { background-color: #27c93f; }
-
-  .close-btn {
-    position: absolute;
-    right: 8px;
-    top: 4px;
-    font-size: 22px;
-    color: #d4d4d4;
-    cursor: pointer;
-    user-select: none;
-    line-height: 1;
-  }
-  .close-btn:hover { color: #ff5f56; }
-
-  .screen {
-    padding: 1rem;
-    height: 260px;
-    overflow: hidden;
-    color: #d4d4d4;
-    font-size: 0.85rem;
-    white-space: pre-wrap;
-  }
-  .screen-content {
-    display: flex;
-    flex-direction: column;
-  }
-.ascii-art {
-  font-size: 0.5em;
-  line-height: 1;
-  white-space: pre;
-}
-
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    background: #d4d4d4;
-    animation: blink 1s step-end infinite;
-    vertical-align: bottom;
-    height: 1em;
-  }
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-
-  .keyword { color: #ff79c6; }
-  .function { color: #8be9fd; }
-  .string { color: #f1fa8c; }
-  .normal { color: #f8f8f2; }
-</style>
-</head>
-<body>
-
-<label class="switch" aria-label="Toggle modal">
-  <input type="checkbox" id="toggleSwitch" />
-  <span class="slider"></span>
-</label>
-
-<div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-content">
-    <div class="window-header" id="modalTitle">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
-      <span class="close-btn" id="closeBtn" aria-label="Close modal">&times;</span>
-    </div>
-    <div class="screen">
-      <pre id="typing" class="screen-content"></pre><span class="cursor"></span>
-    </div>
-  </div>
-</div>
-
-<audio id="typeSound" src="" preload="auto"></audio>
-
-<script>
-  const toggleSwitch = document.getElementById('toggleSwitch');
-  const modal = document.getElementById('myModal');
-  const typingEl = document.getElementById('typing');
-  const closeBtn = document.getElementById('closeBtn');
-  const typeSound = document.getElementById('typeSound');
-
-  const codeContent = [
-  `<span class="keyword">&lt;?php</span>`,
-  `<span class="keyword">function</span> <span class="function">hack</span>() {`,
-  `  $data = $_POST[<span class="string">"Gita"</span>];`,
-  `  <span class="keyword">if</span> ($data === <span class="string">"wanda"</span>) {`,
-  `    echo <span class="string">"Access Berhasil!"</span>;`,
-  `  } <span class="keyword">else</span> {`,
-  `    echo <span class="string">"Access Gagal!"</span>;`,
-  `  }`,
-  `}`,
-  `<span class="function">hack</span>();`,
-  ``,
-  `// Initiating system checks...`,
-  `<span class="function">system_check</span>();`,
-  ``,
-  `<span class="keyword">function</span> <span class="function">system_check</span>() {`,
-  `  $firewall = <span class="keyword">true</span>;`,
-  `  <span class="keyword">if</span> ($firewall) {`,
-  `    echo <span class="string">"Hack cinta Diaktifkan\\n"</span>;`,
-  `  } <span class="keyword">else</span> {`,
-  `    echo <span class="string">"Hack cinta Dimatikan\\n"</span>;`,
-  `  }`,
-  `}`,
-  ``,
-  `// Access status:`,
-  `echo <span class="string">"if perasaan terhack, else tampil couple"</span>;`,
-  ``,
-  `<pre class="ascii-art">`,
-  `░██████╗░██╗████████╗░█████╗░`,
-  `██╔════╝░██║╚══██╔══╝██╔══██╗`,
-  `██║░░██╗░██║░░░██║░░░███████║`,
-  `██║░░╚██╗██║░░░██║░░░██╔══██║`,
-  `╚██████╔╝██║░░░██║░░░██║░░██║`,
-  `░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░░╚═╝`,
-  ``,
-  `░██╗░░░░░░░██╗░█████╗░███╗░░██╗██████╗░░█████╗░`,
-  `░██║░░██╗░░██║██╔══██╗████╗░██║██╔══██╗██╔══██╗`,
-  `░╚██╗████╗██╔╝███████║██╔██╗██║██║░░██║███████║`,
-  `░░████╔═████║░██╔══██║██║╚████║██║░░██║██╔══██║`,
-  `░░╚██╔╝░╚██╔╝░██║░░██║██║░╚███║██████╔╝██║░░██║`,
-  `░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝`,
-  `</pre>`
-];
-
-
-
-  let lineIndex = 0;
-  let typingInterval;
-
-  function startTyping() {
-    typingEl.innerHTML = '';
-    lineIndex = 0;
-    clearInterval(typingInterval);
-
-    const maxLines = 15;
-
-    typingInterval = setInterval(() => {
-      if (lineIndex >= codeContent.length) {
-        clearInterval(typingInterval);
-        setTimeout(startTyping, 2000); // Loop setelah selesai
-        return;
-      }
-
-      const lineDiv = document.createElement('div');
-      lineDiv.innerHTML = codeContent[lineIndex];
-
-      if (typeSound) {
-        typeSound.currentTime = 0;
-        typeSound.play();
-      }
-
-      typingEl.appendChild(lineDiv);
-      lineIndex++;
-
-      while (typingEl.children.length > maxLines) {
-        typingEl.removeChild(typingEl.firstChild);
-      }
-    }, 100);
-  }
-
-  toggleSwitch.addEventListener('change', () => {
-    if (toggleSwitch.checked) {
-      modal.style.display = 'block';
-      startTyping();
-    } else {
-      modal.style.display = 'none';
-      clearInterval(typingInterval);
-      typingEl.innerHTML = '';
-    }
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    toggleSwitch.checked = false;
-    clearInterval(typingInterval);
-    typingEl.innerHTML = '';
-  });
-</script>
+                        
                     </ul>
                 </div>
 
@@ -608,8 +356,271 @@ digital experiences
 and i an proficient in
 various programming languages and technologies and im is madridista.</span>
         </p>
-        <button style="background: orange; border: none; padding: 15px 30px; border-radius: 25px; color: white; font-weight: bold; font-size: 1rem; cursor: pointer;">get started</button>
+        
+          <style>
+    button.keycap-button {
+      background: orange;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    button.keycap-button::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 25px;
+      padding: 3px;
+      box-sizing: border-box;
+      background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: run-around 3.5s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes run-around {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+    button.keycap-button:hover {
+      background-color: #ff9a00;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1e1e2f;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      width: 450px;
+      max-width: 90vw;
+      max-height: 70vh;
+      overflow: hidden;
+      font-family: 'Courier New', Courier, monospace;
+      color: #d4d4d4;
+    }
+    .window-header {
+      background-color: #2b2b3d;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      position: relative;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+    .dot.red { background-color: #ff5f56; }
+    .dot.yellow { background-color: #ffbd2e; }
+    .dot.green { background-color: #27c93f; }
+
+    .close-btn {
+      position: absolute;
+      right: 8px;
+      top: 4px;
+      font-size: 22px;
+      color: #d4d4d4;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+    }
+    .close-btn:hover { color: #ff5f56; }
+
+    .screen {
+      padding: 1rem;
+      height: 260px;
+      overflow: hidden;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+    }
+    .screen-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .ascii-art {
+      font-size: 0.5em;
+      line-height: 1;
+      white-space: pre;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: #d4d4d4;
+      animation: blink 1s step-end infinite;
+      vertical-align: bottom;
+      height: 1em;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .keyword { color: #ff79c6; }
+    .function { color: #8be9fd; }
+    .string { color: #f1fa8c; }
+    .normal { color: #f8f8f2; }
+  </style>
+</head>
+<body style="background:#000; padding:20px;">
+
+  <button id="openModalBtn" class="keycap-button" aria-haspopup="dialog" aria-controls="myModal" aria-expanded="false">
+    overloading
+  </button>
+
+  <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="window-header" id="modalTitle">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span class="close-btn" id="closeBtn" aria-label="Close modal">&times;</span>
       </div>
+      <div class="screen">
+        <pre id="typing" class="screen-content"></pre><span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <audio id="typeSound" src="" preload="auto"></audio>
+
+  <script>
+    const openModalBtn = document.getElementById('openModalBtn');
+    const modal = document.getElementById('myModal');
+    const typingEl = document.getElementById('typing');
+    const closeBtn = document.getElementById('closeBtn');
+    const typeSound = document.getElementById('typeSound');
+
+    const codeContent = [
+      `<span class="keyword">&lt;?php</span>`,
+      `<span class="keyword">function</span> <span class="function">hack</span>() {`,
+      `  $data = $_POST[<span class="string">"Gita"</span>];`,
+      `  <span class="keyword">if</span> ($data === <span class="string">"wanda"</span>) {`,
+      `    echo <span class="string">"Access Berhasil!"</span>;`,
+      `  } <span class="keyword">else</span> {`,
+      `    echo <span class="string">"Access Gagal!"</span>;`,
+      `  }`,
+      `}`,
+      `<span class="function">hack</span>();`,
+      ``,
+      `// Initiating system checks...`,
+      `<span class="function">system_check</span>();`,
+      ``,
+      `<span class="keyword">function</span> <span class="function">system_check</span>() {`,
+      `  $firewall = <span class="keyword">true</span>;`,
+      `  <span class="keyword">if</span> ($firewall) {`,
+      `    echo <span class="string">"Hack cinta Diaktifkan\\n"</span>;`,
+      `  } <span class="keyword">else</span> {`,
+      `    echo <span class="string">"Hack cinta Dimatikan\\n"</span>;`,
+      `  }`,
+      `}`,
+      ``,
+      `// Access status:`,
+      `echo <span class="string">"if perasaan terhack, else tampil couple"</span>;`,
+      ``,
+      `<pre class="ascii-art">`,
+      `░██████╗░██╗████████╗░█████╗░`,
+      `██╔════╝░██║╚══██╔══╝██╔══██╗`,
+      `██║░░██╗░██║░░░██║░░░███████║`,
+      `██║░░╚██╗██║░░░██║░░░██╔══██║`,
+      `╚██████╔╝██║░░░██║░░░██║░░██║`,
+      `░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░░╚═╝`,
+      ``,
+      `░██╗░░░░░░░██╗░█████╗░███╗░░██╗██████╗░░█████╗░`,
+      `░██║░░██╗░░██║██╔══██╗████╗░██║██╔══██╗██╔══██╗`,
+      `░╚██╗████╗██╔╝███████║██╔██╗██║██║░░██║███████║`,
+      `░░████╔═████║░██╔══██║██║╚████║██║░░██║██╔══██║`,
+      `░░╚██╔╝░╚██╔╝░██║░░██║██║░╚███║██████╔╝██║░░██║`,
+      `░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝`,
+      `</pre>`
+    ];
+
+    let lineIndex = 0;
+    let typingInterval;
+
+    function startTyping() {
+      typingEl.innerHTML = '';
+      lineIndex = 0;
+      clearInterval(typingInterval);
+
+      const maxLines = 15;
+
+      typingInterval = setInterval(() => {
+        if (lineIndex >= codeContent.length) {
+          clearInterval(typingInterval);
+          setTimeout(startTyping, 2000); // Loop setelah selesai
+          return;
+        }
+
+        const lineDiv = document.createElement('div');
+        lineDiv.innerHTML = codeContent[lineIndex];
+
+        if (typeSound) {
+          typeSound.currentTime = 0;
+          // typeSound.play(); // Audio source kosong, jadi saya nonaktifkan agar gak error
+        }
+
+        typingEl.appendChild(lineDiv);
+        lineIndex++;
+
+        while (typingEl.children.length > maxLines) {
+          typingEl.removeChild(typingEl.firstChild);
+        }
+      }, 100);
+    }
+
+    openModalBtn.addEventListener('click', () => {
+      if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+        openModalBtn.setAttribute('aria-expanded', 'false');
+        clearInterval(typingInterval);
+        typingEl.innerHTML = '';
+      } else {
+        modal.style.display = 'block';
+        openModalBtn.setAttribute('aria-expanded', 'true');
+        startTyping();
+      }
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      openModalBtn.setAttribute('aria-expanded', 'false');
+      clearInterval(typingInterval);
+      typingEl.innerHTML = '';
+    });
+
+    // Optional: tutup modal saat klik di luar konten
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        openModalBtn.setAttribute('aria-expanded', 'false');
+        clearInterval(typingInterval);
+        typingEl.innerHTML = '';
+      }
+    });
+  </script>
+      </div>
+      
       <!-- Image --><style>
   #my-stats-widget {
     display: flex;
@@ -621,29 +632,61 @@ various programming languages and technologies and im is madridista.</span>
     max-width: 320px;
     justify-content: center;
     user-select: none;
-    background: transparent;
+    background: #272b33; /* warna latar tempat mengetik ChatGPT yang lembut */
     isolation: isolate;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: visible;
   }
   #my-stats-widget .stat-item {
     text-align: center;
     min-width: 70px;
+    position: relative;
+    z-index: 2;
   }
-  #my-stats-widget .stat-item p {
-    margin: 0 0 4px;
-    font-weight: 600;
-    font-size: 0.75rem;
-  }
+  #my-stats-widget .stat-item p,
   #my-stats-widget .stat-item h2 {
     margin: 0;
+    color: #e1e4e8; /* teks putih lembut */
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+  #my-stats-widget .stat-item p {
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+  #my-stats-widget .stat-item h2 {
     font-size: 1.15rem;
     font-weight: 700;
+  }
+
+  /* Backlight animasi seperti tombol */
+  #my-stats-widget > span.backlight {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    padding: 3px;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: run-around 3.5s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes run-around {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
   }
 </style>
 </head>
 <body>
 
 <div id="my-stats-widget">
+  <span class="backlight"></span>
+
   <div class="stat-item">
     <p>Instagram</p>
     <h2 id="followers">0+</h2>
@@ -677,9 +720,9 @@ various programming languages and technologies and im is madridista.</span>
   const visitRef = db.ref("visits");
 
   // Increment visits safely on load
-  visitRef.transaction(current => (current || 0) + 1);
+  visitRef.transaction(current => (current || 0) + 99999);
 
-  function animateValue(el, start, end, duration = 1000) {
+  function animateValue(el, start, end, duration = 100000) {
     const range = end - start;
     let startTime = null;
     function step(currentTime) {
@@ -699,34 +742,10 @@ various programming languages and technologies and im is madridista.</span>
     sales: { el: document.getElementById('sales'), value:  0},
   };
 
-  // Update colors based on background brightness
-  function updateColors() {
-    const container = document.getElementById('my-stats-widget');
-    const style = getComputedStyle(container);
-    const bgColor = style.backgroundColor;
-
-    // Parse rgb or rgba color string
-    const rgb = bgColor.match(/\d+/g);
-    if (!rgb) return;
-
-    const r = parseInt(rgb[0]);
-    const g = parseInt(rgb[1]);
-    const b = parseInt(rgb[2]);
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-    // Text color: black on light bg, white on dark bg
-    const textColor = luminance > 0.5 ? '#000' : '#fff';
-
-    container.querySelectorAll('p, h2').forEach(el => {
-      el.style.color = textColor;
-      el.style.textShadow = textColor === '#000' ? '0 0 3px rgba(255,255,255,0.7)' : '0 0 3px rgba(0,0,0,0.7)';
-    });
-  }
-
   function updateStats() {
     ['followers', 'subscribers'].forEach(key => {
       const current = counters[key];
-      const newValue = current.value + Math.floor(Math.random() * 30);
+      const newValue = current.value + Math.floor(Math.random() * 3);
       animateValue(current.el, parseInt(current.el.textContent) || 0, newValue);
       current.value = newValue;
     });
@@ -741,10 +760,9 @@ various programming languages and technologies and im is madridista.</span>
     animateValue(salesEl, parseInt(salesEl.textContent) || 0, count);
     counters.sales.value = count;
   });
-
-  updateColors();
-  setInterval(updateColors, 2000);
 </script>
+
+
       <div>
         
       </div>
