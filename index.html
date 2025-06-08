@@ -762,6 +762,7 @@ various programming languages and technologies and im is madridista.</span>
   });
 </script>
 
+<br>
 
       <div>
         
@@ -845,6 +846,254 @@ various programming languages and technologies and im is madridista.</span>
 
 
             <!--=============== SERVICES ===============-->
+            
+            <div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+">
+  <div id="my-stats-widget" style="
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    background: #848484;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+  ">
+    <span class="backlight" style="
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 12px;
+      padding: 3px;
+      background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: run-around 3.5s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    "></span>
+
+    <div class="stat-item" style="
+      text-align: center;
+      min-width: 70px;
+      position: relative;
+      z-index: 2;
+    ">
+      <h2 id="digital-clock" style="
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        color: #e1e4e8;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      ">00:00:00</h2>
+    </div>
+  </div>
+</div>
+
+<script>
+  function pad(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function updateClock() {
+    const now = new Date();
+    const timeString = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    document.getElementById('digital-clock').textContent = timeString;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+<style>
+  @keyframes run-around {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+</style>
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+
+
+            <div id="contrast-quote" style="
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.4;
+  transition: color 0.7s ease, opacity 0.8s ease;
+  opacity: 1;
+">
+  <p id="quote-text" style="margin: 0 0 0.5rem 0;"></p>
+  <h3 id="quote-author" style="font-weight: 500; font-size: 1.05rem; margin: 0;"></h3>
+</div>
+
+<script>
+  (function(){
+    const quotes_en = [
+      {text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney"},
+      {text: "Don’t let yesterday take up too much of today.", author: "Will Rogers"},
+      {text: "It’s not whether you get knocked down, it’s whether you get up.", author: "Vince Lombardi"},
+      {text: "Success is not in what you have, but who you are.", author: "Bo Bennett"},
+      {text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt"}
+    ];
+
+    const quotes_id = [
+      {text: "Cara terbaik untuk memulai adalah berhenti bicara dan mulai bertindak.", author: "Walt Disney"},
+      {text: "Jangan biarkan kemarin mengambil terlalu banyak hari ini.", author: "Will Rogers"},
+      {text: "Bukan soal seberapa keras kamu terjatuh, tapi seberapa kuat kamu bangkit.", author: "Vince Lombardi"},
+      {text: "Kesuksesan bukan pada apa yang kamu miliki, tapi siapa dirimu.", author: "Bo Bennett"},
+      {text: "Masa depan adalah milik mereka yang percaya pada keindahan mimpi mereka.", author: "Eleanor Roosevelt"}
+    ];
+
+    const container = document.getElementById('contrast-quote');
+    const textEl = document.getElementById('quote-text');
+    const authorEl = document.getElementById('quote-author');
+
+    function getLuminance(rgb) {
+      const parts = rgb.match(/\d+/g).map(Number);
+      const [r, g, b] = parts.map(v => v / 255);
+      const a = [r,g,b].map(v =>
+        v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4)
+      );
+      return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+    }
+
+    function getContrastColor(bgRgb) {
+      return getLuminance(bgRgb) > 0.179 ? '#000000' : '#ffffff';
+    }
+
+    function updateTextColor() {
+      let bgColor = window.getComputedStyle(container.parentElement).backgroundColor;
+      if(!bgColor || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent'){
+        bgColor = window.getComputedStyle(document.body).backgroundColor;
+      }
+      const textColor = getContrastColor(bgColor);
+      textEl.style.color = textColor;
+      authorEl.style.color = textColor;
+    }
+
+    let index = 0;
+    function showQuote() {
+      container.style.opacity = 0;
+
+      setTimeout(() => {
+        // Ganti bahasa berdasarkan index ganjil/genap, atau bisa juga random
+        const useEnglish = index % 2 === 0; // even = english, odd = indonesia
+
+        const quote = useEnglish ? quotes_en[index % quotes_en.length] : quotes_id[index % quotes_id.length];
+
+        textEl.textContent = `"${quote.text}"`;
+        authorEl.textContent = `— ${quote.author}`;
+
+        updateTextColor();
+        container.style.opacity = 1;
+        index++;
+      }, 800);
+    }
+
+    showQuote();
+    setInterval(showQuote, 7000);
+
+    window.addEventListener('resize', updateTextColor);
+  })();
+</script>
+           <div class="quote-component">
+  <div class="quote-widget">
+    <span class="backlight"></span>
+    <div class="quote-text-box">
+      <p class="quote-text">
+        "The real madrid shirt is white. You can cover it in mud, sweat or blood. But never shame."  
+        <br><span style="font-weight: 400;">— realmadrid</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quote-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .quote-widget {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    background: #123767;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    max-width: 340px;
+    text-align: center;
+    isolation: isolate;
+  }
+
+  .quote-widget .backlight {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    padding: 3px;
+    background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: run-around 3.5s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .quote-text-box {
+    position: relative;
+    z-index: 2;
+    color: #e1e4e8;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .quote-text {
+    margin: 0;
+    font-style: italic;
+  }
+
+  @keyframes run-around {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .quote-widget {
+      background: #f9f9f9;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+    }
+
+    .quote-text-box {
+      color: #222;
+      text-shadow: none;
+    }
+  }
+</style>
+
+
+
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+
             <!-- Laptop Terminal Taller -->
 <div style="display: flex; justify-content: center; margin: 40px 0;">
   <div style="width: 280px; height: 200px; transform-style: preserve-3d;">
@@ -972,97 +1221,9 @@ function type() {
 }
 type();
 </script>
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
-            <div class="quote-component">
-  <div class="quote-container">
-    <div class="quote-box">
-      <p class="quote-text"><span class="shimmer-small-text">"The real madrid shirt is white.
-You can cover it in mud, sweat or blood. But never shame"</p></span>
-    </div>
-  </div>
-</div>
 
-<style>
-  .quote-component .quote-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
-
-  .quote-component .quote-box {
-    position: relative;
-    max-width: 320px;
-    padding: 1.2rem 1.5rem;
-    border-radius: 12px;
-
-    border: 2px solid black;
-    box-shadow:
-      0 0 8px rgba(0, 200, 255, 0.7),  /* Neon light blue shadow */
-      0 0 6px white,
-      0 0 6px black;
-
-    background: transparent;
-    color: var(--text-color, #222);
-    font-weight: 600;
-    font-size: 1.2rem;
-    line-height: 1.4;
-    overflow: hidden;
-  }
-
-  .quote-component .quote-text {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .quote-component .quote-text::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -150%;
-    width: 250%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(255,255,255,0) 100%
-    );
-    animation: shimmer-horizontal 2.5s infinite;
-    pointer-events: none;
-    filter: brightness(0) blur(1px);
-    mix-blend-mode: screen;
-    z-index: 1;
-  }
-
-  @keyframes shimmer-horizontal {
-    0% {
-      left: -150%;
-    }
-    100% {
-      left: 150%;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .quote-component .quote-box {
-      border: 2px solid white;
-      box-shadow:
-        0 0 8px rgba(255, 247, 0, 0.8),  /* Neon blue for dark mode */
-        0 0 4px black,
-        0 0 6px white;
-      color: var(--text-color, #eee);
-    }
-
-    .quote-component .quote-text::before {
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.941) 0%,
-        rgb(162, 162, 162) 50%,
-        rgb(0, 0, 0) 100%
-      );
-    }
-  }
-</style>
 
             <section class="services section container" id="services">
                 <div class="fade-up">
@@ -1860,6 +2021,9 @@ Travel changes how we see the world, and adventure gives life its true color.</p
                 </div>
             </section>
             <br>
+            <!--=============== PEMBATAS ===============-->
+            <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+<!--=============== PEMBATAS ===============-->
             <div class="services__data">
                        
 
@@ -1917,53 +2081,141 @@ Camping in nature helps me recharge and find inspiration for my creative project
                         
                     </div>
 
-                <div class="hobby-wrapper">
-                  
-  <h2 class="hobby-title"></h2>
-<div class="fade-up">
-  <section class="hobby-straws">
-    <div class="straw-hobby" data-percent="95">
-      <span class="hobby-label"> webdeveloper</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">90%</span>
-      </div>
-    </div>
+                <style>
+  @keyframes run-around {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
 
-    <div class="straw-hobby" data-percent="90">
-      <span class="hobby-label">roadtripper</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">99%</span>
-      </div>
-    </div>
+  .hobby-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+  }
 
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> Photography</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
+  .hobby-border {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+    border-radius: 12px;
+    position: relative;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .hobby-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 3px;
+    background: linear-gradient(90deg, transparent 20%, #ffd900, transparent 80%) 0 0 / 200% 100% no-repeat;
+    -webkit-mask: linear-gradient(#ffc800 0 0) content-box, linear-gradient(#eb0000 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: run-around 3.5s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hobby-content {
+    position: relative;
+    z-index: 2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+  }
+
+  .straw-hobby {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .hobby-label {
+    font-weight: bold;
+    text-transform: lowercase;
+  }
+
+  .straw {
+    background: #111;
+    border-radius: 8px;
+    height: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .straw-fill {
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    height: 100%;
+    width: 0%;
+    border-radius: 8px;
+  }
+
+  .straw-percent {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+  }
+</style>
+
+<div class="hobby-container-wrapper">
+  <div class="hobby-border">
+    <div class="hobby-content">
+      <div class="straw-hobby" data-percent="95">
+        <span class="hobby-label">webdeveloper</span>
+        <div class="straw">
+          <div class="straw-fill"></div>
+          <span class="straw-percent">90%</span>
+        </div>
+      </div>
+
+      <div class="straw-hobby" data-percent="90">
+        <span class="hobby-label">roadtripper</span>
+        <div class="straw">
+          <div class="straw-fill"></div>
+          <span class="straw-percent">99%</span>
+        </div>
+      </div>
+
+      <div class="straw-hobby" data-percent="80">
+        <span class="hobby-label">photography</span>
+        <div class="straw">
+          <div class="straw-fill"></div>
+          <span class="straw-percent">60%</span>
+        </div>
+      </div>
+
+      <div class="straw-hobby" data-percent="80">
+        <span class="hobby-label">backpackeran</span>
+        <div class="straw">
+          <div class="straw-fill"></div>
+          <span class="straw-percent">60%</span>
+        </div>
+      </div>
+
+      <div class="straw-hobby" data-percent="80">
+        <span class="hobby-label">nature camp</span>
+        <div class="straw">
+          <div class="straw-fill"></div>
+          <span class="straw-percent">60%</span>
+        </div>
       </div>
     </div>
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> backpackeran</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
-      </div>
-    </div>
-    <div class="straw-hobby" data-percent="80">
-      <span class="hobby-label"> nature camp</span>
-      <div class="straw">
-        <div class="straw-fill"></div>
-        <span class="straw-percent">60%</span>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-</div>
-
-
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -1972,7 +2224,7 @@ Camping in nature helps me recharge and find inspiration for my creative project
       const fill = el.querySelector(".straw-fill");
       const text = el.querySelector(".straw-percent");
 
-      let direction = 1; // 1 = naik, -1 = turun
+      let direction = 1;
       let current = 0;
 
       function animate() {
@@ -1994,6 +2246,10 @@ Camping in nature helps me recharge and find inspiration for my creative project
     });
   });
 </script>
+
+<!--=============== PEMBATAS ===============-->
+            <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+<!--=============== PEMBATAS ===============-->
             <!--=============== APP ===============-->
             <section class="app section container">
                 <div class="app__container grid">
@@ -2275,7 +2531,9 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
                     </div>
                 </div>
             </section>
-
+<!--=============== PEMBATAS ===============-->
+            <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+<!--=============== PEMBATAS ===============-->
             <!--=============== CONTACT US ===============-->
             <section class="contact section container" id="contact">
                 <div class="contact__container grid">
@@ -2360,6 +2618,7 @@ Follow my journey, latest works, and exciting stories about hobbies, skills, and
             </section>
         </main>
     </div>
+    
         <!--=============== FOOTER ===============-->
         <footer class="real-footer">
   <div class="footer-content">
