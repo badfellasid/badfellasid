@@ -925,20 +925,28 @@ various programming languages and technologies and im is madridista.</span>
 </script>
 
 <style>
-  .drawer { position: fixed; top: 50%; right: -70px; width: 70px; background: rgba(255,255,255,0.6); backdrop-filter: blur(8px);
-    border: 1.5px solid rgba(200,200,200,0.6); border-radius: 20px 0 0 20px; transition: right 0.3s ease; padding:8px 0;
-    box-sizing: border-box; display:flex; justify-content:center; align-items:center; flex-direction:column; gap:12px;
-    z-index: 9999; transform:translateY(-50%);}
+  .drawer {
+    position: fixed; top: 50%; right: -70px; width: 70px; background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px); border: 1.5px solid rgba(200,200,200,0.6); border-radius: 20px 0 0 20px;
+    transition: right 0.3s ease; padding:8px 0; box-sizing: border-box; display:flex;
+    justify-content:center; align-items:center; flex-direction:column; gap:12px; z-index: 9999;
+    transform:translateY(-50%);
+  }
   .drawer.open { right:0; }
-  .drawer-handle { position:absolute; top:50%; left:-25px; width:25px; height:50px; background:linear-gradient(135deg,#FFD700,#FFEA00);
-    border:1px solid #fff; border-radius:10px 0 0 10px; cursor:pointer; transform:translateY(-50%); display:flex; justify-content:center; 
-    align-items:center; color:#fff; font-size:18px; user-select:none;}
-  .menu-icon { position:relative; cursor:pointer;}
-  .menu-icon img { width:28px; height:28px; transition:transform 0.2s;}
-  .menu-icon:hover img { transform:scale(1.15);}
-  .menu-icon::after { content:attr(data-label); position:absolute; left:-100px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.7);
-    color:#fff; padding:4px 8px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.3s, left 0.3s; font-size:12px;}
-  .menu-icon:hover::after { opacity:1; left:-60px;}
+  .drawer-handle {
+    position:absolute; top:50%; left:-25px; width:25px; height:50px; background:linear-gradient(135deg,#FFD700,#FFEA00);
+    border:1px solid #fff; border-radius:10px 0 0 10px; cursor:pointer; transform:translateY(-50%);
+    display:flex; justify-content:center; align-items:center; color:#fff; font-size:18px; user-select:none;
+  }
+  .menu-icon { position:relative; cursor:pointer; }
+  .menu-icon img { width:28px; height:28px; transition:transform 0.2s; }
+  .menu-icon:hover img { transform:scale(1.15); }
+  .menu-icon::after {
+    content:attr(data-label); position:absolute; left:-100px; top:50%; transform:translateY(-50%);
+    background:rgba(0,0,0,0.7); color:#fff; padding:4px 8px; border-radius:6px; white-space:nowrap;
+    opacity:0; pointer-events:none; transition:opacity 0.3s, left 0.3s; font-size:12px;
+  }
+  .menu-icon:hover::after { opacity:1; left:-60px; }
 
   @media screen and (max-width:600px){
     .drawer { width:60px; }
@@ -946,16 +954,20 @@ various programming languages and technologies and im is madridista.</span>
     .menu-icon img { width:24px; height:24px;}
     .menu-icon::after { left:-90px; font-size:11px;}
   }
+  @keyframes run-around {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
 </style>
 
-<!-- Modal untuk Drawer Action -->
+<!-- Modal Semua Action: Real Madrid Style -->
 <style>
   .drawer-modal {
     display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); justify-content: center; align-items: center;
   }
   .drawer-modal-content {
-    background: #fff; padding: 20px 25px; border-radius: 12px; max-width: 300px; text-align: center; 
+    background: #fff; padding: 20px 25px; border-radius: 12px; max-width: 300px; text-align: center;
     font-family: 'Arial', sans-serif; font-size: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); position: relative;
   }
   .drawer-modal-content h3 { font-size: 20px; margin-bottom: 10px; color: #333; }
@@ -966,93 +978,100 @@ various programming languages and technologies and im is madridista.</span>
   .drawer-close:hover { color: #333; }
 </style>
 
+<!-- Home -->
 <div id="modalHome" class="drawer-modal">
   <div class="drawer-modal-content">
     <span class="drawer-close" onclick="closeDrawerModal('modalHome')">&times;</span>
     <h3>Home</h3>
-   <div style="
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
-">
-  <div id="my-stats-widget" style="
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(255, 208, 0, 0.6);
-    background: #c4c4c4;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    position: relative;
-  ">
-    <span class="backlight" style="
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 12px;
-      padding: 3px;
-      background: linear-gradient(90deg, transparent 20%, #ffffff, transparent 80%) 0 0 / 200% 100% no-repeat;
-      -webkit-mask: linear-gradient(#fff700 0 0) content-box, linear-gradient(#ffff00 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      animation: run-around 3.5s linear infinite;
-      pointer-events: none;
-      z-index: 1;
-    "></span>
-
-    <div class="stat-item" style="
-      text-align: center;
-      min-width: 70px;
-      position: relative;
-      z-index: 2;
-    ">
-      <h2 id="digital-clock" style="
-        font-size: 1rem;
-        font-weight: 600;
-        margin: 0;
-        color: #000000;
-        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-      ">00:00:00</h2>
+    <div style="display:flex;justify-content:center;align-items:center;padding:1rem 0;">
+      <div style="display:flex;justify-content:center;padding:1rem 1.5rem;border:1px solid rgba(255,255,255,0.15);
+        border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.6);background:#ffffff;position:relative;max-width:340px;text-align:center;isolation:isolate;">
+        <span style="content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:3px;
+          background:linear-gradient(90deg,transparent 20%,#00ffff,transparent 80%) 0 0/200% 100% no-repeat;
+          -webkit-mask:linear-gradient(#000000 0 0) content-box,linear-gradient(#00ffff 0 0);
+          -webkit-mask-composite:destination-out;mask-composite:exclude;animation:run-around 3.5s linear infinite;
+          pointer-events:none;z-index:1;"></span>
+        <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
+          <p style="margin:0;font-style:italic;">
+            "Welcome to Home section — Real Madrid Style."<br>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<script>
-  function pad(num) {
-    return num.toString().padStart(2, '0');
-  }
-
-  function updateClock() {
-    const now = new Date();
-    const timeString = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-    document.getElementById('digital-clock').textContent = timeString;
-  }
-
-  updateClock();
-  setInterval(updateClock, 1000);
-</script> <p>fitur dalam tahap maintenance</p>
-  </div>
-</div>
+<!-- Search -->
 <div id="modalSearch" class="drawer-modal">
   <div class="drawer-modal-content">
     <span class="drawer-close" onclick="closeDrawerModal('modalSearch')">&times;</span>
-    
-    <h3>Search</h3><p>fitur dalam tahap maintenance</p>
-    
+    <h3>Search</h3>
+    <div style="display:flex;justify-content:center;align-items:center;padding:1rem 0;">
+      <div style="display:flex;justify-content:center;padding:1rem 1.5rem;border:1px solid rgba(255,255,255,0.15);
+        border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.6);background:#ffffff;position:relative;max-width:340px;text-align:center;isolation:isolate;">
+        <span style="content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:3px;
+          background:linear-gradient(90deg,transparent 20%,#ff0000,transparent 80%) 0 0/200% 100% no-repeat;
+          -webkit-mask:linear-gradient(#000000 0 0) content-box,linear-gradient(#ff0000 0 0);
+          -webkit-mask-composite:destination-out;mask-composite:exclude;animation:run-around 3.5s linear infinite;
+          pointer-events:none;z-index:1;"></span>
+        <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
+          <p style="margin:0;font-style:italic;">
+            "The real madrid shirt is white. You can cover it in mud, sweat or blood. But never shame."<br>
+            <span style="font-weight:400;">— realmadrid</span><br>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Info -->
 <div id="modalInfo" class="drawer-modal">
   <div class="drawer-modal-content">
     <span class="drawer-close" onclick="closeDrawerModal('modalInfo')">&times;</span>
-    <h3>Info</h3><p>fitur dalam tahap maintenance</p>
+    <h3>Info</h3>
+    <div style="display:flex;justify-content:center;align-items:center;padding:1rem 0;">
+      <div style="display:flex;justify-content:center;padding:1rem 1.5rem;border:1px solid rgba(255,255,255,0.15);
+        border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.6);background:#ffffff;position:relative;max-width:340px;text-align:center;isolation:isolate;">
+        <span style="content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:3px;
+          background:linear-gradient(90deg,transparent 20%,#00ff00,transparent 80%) 0 0/200% 100% no-repeat;
+          -webkit-mask:linear-gradient(#000000 0 0) content-box,linear-gradient(#00ff00 0 0);
+          -webkit-mask-composite:destination-out;mask-composite:exclude;animation:run-around 3.5s linear infinite;
+          pointer-events:none;z-index:1;"></span>
+        <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
+          <p style="margin:0;font-style:italic;">
+            "Info section with Real Madrid glowing effect."<br>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Pengumuman -->
 <div id="modalPengumuman" class="drawer-modal">
   <div class="drawer-modal-content">
     <span class="drawer-close" onclick="closeDrawerModal('modalPengumuman')">&times;</span>
-    <h3>Pengumuman</h3><p>Tidak ada pengumuman</p>
+    <h3>Pengumuman</h3>
+    <div style="display:flex;justify-content:center;align-items:center;padding:1rem 0;">
+      <div style="display:flex;justify-content:center;padding:1rem 1.5rem;border:1px solid rgba(255,255,255,0.15);
+        border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.6);background:#ffffff;position:relative;max-width:340px;text-align:center;isolation:isolate;">
+        <span style="content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:3px;
+          background:linear-gradient(90deg,transparent 20%,#ffff00,transparent 80%) 0 0/200% 100% no-repeat;
+          -webkit-mask:linear-gradient(#000000 0 0) content-box,linear-gradient(#ffff00 0 0);
+          -webkit-mask-composite:destination-out;mask-composite:exclude;animation:run-around 3.5s linear infinite;
+          pointer-events:none;z-index:1;"></span>
+        <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
+          <p style="margin:0;font-style:italic;">
+            "No new announcements — stay tuned."<br>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1076,6 +1095,7 @@ various programming languages and technologies and im is madridista.</span>
     });
   });
 </script>
+
 
 <!-- Drawer Auto Height END -->
 
