@@ -859,8 +859,8 @@ various programming languages and technologies and im is madridista.</span>
       <div class="menu-icon" data-label="Search">
         <img src="https://cdn-icons-png.flaticon.com/128/2721/2721590.png" alt="Search">
       </div>
-      <div class="menu-icon" data-label="Favorite">
-        <img src="https://cdn-icons-png.flaticon.com/128/1822/1822940.png" alt="Favorite">
+      <div class="menu-icon" data-label="Info">
+        <img src="https://cdn-icons-png.flaticon.com/128/1822/1822940.png" alt="Info">
       </div>
       <div class="menu-icon" data-label="Pengumuman">
         <img src="https://cdn-icons-png.flaticon.com/128/9476/9476927.png" alt="Pengumuman">
@@ -969,54 +969,8 @@ various programming languages and technologies and im is madridista.</span>
 <div id="modalHome" class="drawer-modal">
   <div class="drawer-modal-content">
     <span class="drawer-close" onclick="closeDrawerModal('modalHome')">&times;</span>
-    <h3>Home</h3><p>Ini menu Home. Tambahkan isi sesuai kebutuhan Anda.</p>
-  </div>
-</div>
-<div id="modalSearch" class="drawer-modal">
-  <div class="drawer-modal-content">
-    <span class="drawer-close" onclick="closeDrawerModal('modalSearch')">&times;</span>
-    <h3>Search</h3><p>Menu Search aktif. Sesuaikan fitur pencarian di sini.</p>
-  </div>
-</div>
-<div id="modalFavorite" class="drawer-modal">
-  <div class="drawer-modal-content">
-    <span class="drawer-close" onclick="closeDrawerModal('modalFavorite')">&times;</span>
-    <h3>Favorite</h3><p>Menu Favorite. Tambahkan item favorit di sini.</p>
-  </div>
-</div>
-<div id="modalPengumuman" class="drawer-modal">
-  <div class="drawer-modal-content">
-    <span class="drawer-close" onclick="closeDrawerModal('modalPengumuman')">&times;</span>
-    <h3>Pengumuman</h3><p>Bagian pengumuman tersedia. Tambahkan info penting di sini.</p>
-  </div>
-</div>
-
-<script>
-  function openDrawerModal(modalId) {
-    document.querySelectorAll('.drawer-modal').forEach(modal => modal.style.display = 'none');
-    document.getElementById(modalId).style.display = 'flex';
-  }
-  function closeDrawerModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-  }
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.menu-icon').forEach(icon => {
-      icon.addEventListener('click', function() {
-        const label = this.getAttribute('data-label');
-        if(label === 'Home') openDrawerModal('modalHome');
-        if(label === 'Search') openDrawerModal('modalSearch');
-        if(label === 'Favorite') openDrawerModal('modalFavorite');
-        if(label === 'Pengumuman') openDrawerModal('modalPengumuman');
-      });
-    });
-  });
-</script>
-
-<!-- Drawer Auto Height END -->
-
-            
-
-<div style="
+    <h3>Home</h3>
+   <div style="
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1078,7 +1032,56 @@ various programming languages and technologies and im is madridista.</span>
 
   updateClock();
   setInterval(updateClock, 1000);
+</script> <p>fitur dalam tahap maintenance</p>
+  </div>
+</div>
+<div id="modalSearch" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalSearch')">&times;</span>
+    
+    <h3>Search</h3><p>fitur dalam tahap maintenance</p>
+    
+  </div>
+</div>
+<div id="modalInfo" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalInfo')">&times;</span>
+    <h3>Info</h3><p>fitur dalam tahap maintenance</p>
+  </div>
+</div>
+<div id="modalPengumuman" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalPengumuman')">&times;</span>
+    <h3>Pengumuman</h3><p>Tidak ada pengumuman</p>
+  </div>
+</div>
+
+<script>
+  function openDrawerModal(modalId) {
+    document.querySelectorAll('.drawer-modal').forEach(modal => modal.style.display = 'none');
+    document.getElementById(modalId).style.display = 'flex';
+  }
+  function closeDrawerModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.menu-icon').forEach(icon => {
+      icon.addEventListener('click', function() {
+        const label = this.getAttribute('data-label');
+        if(label === 'Home') openDrawerModal('modalHome');
+        if(label === 'Search') openDrawerModal('modalSearch');
+        if(label === 'Info') openDrawerModal('modalInfo');
+        if(label === 'Pengumuman') openDrawerModal('modalPengumuman');
+      });
+    });
+  });
 </script>
+
+<!-- Drawer Auto Height END -->
+
+            
+
+
 
 <style>
   @keyframes run-around {
