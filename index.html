@@ -846,8 +846,177 @@ various programming languages and technologies and im is madridista.</span>
 
 
             <!--=============== SERVICES ===============-->
+
+<!-- Drawer Auto Height START -->
+<div id="customDrawerContainer"></div>
+<script>
+  const drawerHTML = `
+    <div class="drawer" id="drawerCustom">
+      <div class="drawer-handle" id="handleCustom">≡</div>
+      <div class="menu-icon" data-label="Home">
+        <img src="https://cdn-icons-png.flaticon.com/128/3573/3573187.png" alt="Home">
+      </div>
+      <div class="menu-icon" data-label="Search">
+        <img src="https://cdn-icons-png.flaticon.com/128/2721/2721590.png" alt="Search">
+      </div>
+      <div class="menu-icon" data-label="Favorite">
+        <img src="https://cdn-icons-png.flaticon.com/128/1822/1822940.png" alt="Favorite">
+      </div>
+      <div class="menu-icon" data-label="Pengumuman">
+        <img src="https://cdn-icons-png.flaticon.com/128/9476/9476927.png" alt="Pengumuman">
+      </div>
+    </div>
+  `;
+  document.getElementById('customDrawerContainer').innerHTML = drawerHTML;
+
+  const drawer = document.getElementById('drawerCustom');
+  const handle = document.getElementById('handleCustom');
+  let isDragging = false;
+  let autoCloseTimeout;
+
+  handle.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', duringDrag);
+  document.addEventListener('mouseup', stopDrag);
+  handle.addEventListener('touchstart', startDrag);
+  document.addEventListener('touchmove', duringDrag);
+  document.addEventListener('touchend', stopDrag);
+  handle.addEventListener('click', toggleDrawer);
+  drawer.addEventListener('mouseenter', cancelAutoClose);
+  drawer.addEventListener('mouseleave', startAutoClose);
+
+  function startDrag(e) {
+    isDragging = true; cancelAutoClose();
+  }
+  function duringDrag(e) {
+    if (!isDragging) return;
+    let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    let screenWidth = window.innerWidth;
+    let distance = screenWidth - clientX;
+    distance = Math.min(70, Math.max(0, distance));
+    drawer.style.transition = 'none';
+    drawer.style.right = -(70 - distance) + "px";
+  }
+  function stopDrag(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    drawer.style.transition = 'right 0.3s ease';
+    let currentRight = parseInt(drawer.style.right);
+    if (currentRight > -35) openDrawer();
+    else closeDrawer();
+  }
+  function toggleDrawer(e) {
+    if (isDragging) return;
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  }
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawer.style.right = "0px";
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawer.style.right = "-70px";
+  }
+  function startAutoClose() {
+    autoCloseTimeout = setTimeout(() => closeDrawer(), 2000);
+  }
+  function cancelAutoClose() {
+    clearTimeout(autoCloseTimeout);
+  }
+</script>
+
+<style>
+  .drawer { position: fixed; top: 50%; right: -70px; width: 70px; background: rgba(255,255,255,0.6); backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(200,200,200,0.6); border-radius: 20px 0 0 20px; transition: right 0.3s ease; padding:8px 0;
+    box-sizing: border-box; display:flex; justify-content:center; align-items:center; flex-direction:column; gap:12px;
+    z-index: 9999; transform:translateY(-50%);}
+  .drawer.open { right:0; }
+  .drawer-handle { position:absolute; top:50%; left:-25px; width:25px; height:50px; background:linear-gradient(135deg,#FFD700,#FFEA00);
+    border:1px solid #fff; border-radius:10px 0 0 10px; cursor:pointer; transform:translateY(-50%); display:flex; justify-content:center; 
+    align-items:center; color:#fff; font-size:18px; user-select:none;}
+  .menu-icon { position:relative; cursor:pointer;}
+  .menu-icon img { width:28px; height:28px; transition:transform 0.2s;}
+  .menu-icon:hover img { transform:scale(1.15);}
+  .menu-icon::after { content:attr(data-label); position:absolute; left:-100px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.7);
+    color:#fff; padding:4px 8px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.3s, left 0.3s; font-size:12px;}
+  .menu-icon:hover::after { opacity:1; left:-60px;}
+
+  @media screen and (max-width:600px){
+    .drawer { width:60px; }
+    .drawer-handle { width:20px; height:40px; font-size:16px;}
+    .menu-icon img { width:24px; height:24px;}
+    .menu-icon::after { left:-90px; font-size:11px;}
+  }
+</style>
+
+<!-- Modal untuk Drawer Action -->
+<style>
+  .drawer-modal {
+    display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); justify-content: center; align-items: center;
+  }
+  .drawer-modal-content {
+    background: #fff; padding: 20px 25px; border-radius: 12px; max-width: 300px; text-align: center; 
+    font-family: 'Arial', sans-serif; font-size: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); position: relative;
+  }
+  .drawer-modal-content h3 { font-size: 20px; margin-bottom: 10px; color: #333; }
+  .drawer-modal-content p { color: #555; margin-bottom: 20px; line-height: 1.4; }
+  .drawer-close {
+    position: absolute; top: 8px; right: 12px; font-size: 20px; color: #888; cursor: pointer;
+  }
+  .drawer-close:hover { color: #333; }
+</style>
+
+<div id="modalHome" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalHome')">&times;</span>
+    <h3>Home</h3><p>Ini menu Home. Tambahkan isi sesuai kebutuhan Anda.</p>
+  </div>
+</div>
+<div id="modalSearch" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalSearch')">&times;</span>
+    <h3>Search</h3><p>Menu Search aktif. Sesuaikan fitur pencarian di sini.</p>
+  </div>
+</div>
+<div id="modalFavorite" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalFavorite')">&times;</span>
+    <h3>Favorite</h3><p>Menu Favorite. Tambahkan item favorit di sini.</p>
+  </div>
+</div>
+<div id="modalPengumuman" class="drawer-modal">
+  <div class="drawer-modal-content">
+    <span class="drawer-close" onclick="closeDrawerModal('modalPengumuman')">&times;</span>
+    <h3>Pengumuman</h3><p>Bagian pengumuman tersedia. Tambahkan info penting di sini.</p>
+  </div>
+</div>
+
+<script>
+  function openDrawerModal(modalId) {
+    document.querySelectorAll('.drawer-modal').forEach(modal => modal.style.display = 'none');
+    document.getElementById(modalId).style.display = 'flex';
+  }
+  function closeDrawerModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.menu-icon').forEach(icon => {
+      icon.addEventListener('click', function() {
+        const label = this.getAttribute('data-label');
+        if(label === 'Home') openDrawerModal('modalHome');
+        if(label === 'Search') openDrawerModal('modalSearch');
+        if(label === 'Favorite') openDrawerModal('modalFavorite');
+        if(label === 'Pengumuman') openDrawerModal('modalPengumuman');
+      });
+    });
+  });
+</script>
+
+<!-- Drawer Auto Height END -->
+
             
-            <div style="
+
+<div style="
   display: flex;
   justify-content: center;
   align-items: center;
@@ -859,8 +1028,8 @@ various programming languages and technologies and im is madridista.</span>
     padding: 0.5rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    background: #848484;
+    box-shadow: 0 0 10px rgba(255, 208, 0, 0.6);
+    background: #c4c4c4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
   ">
@@ -870,8 +1039,8 @@ various programming languages and technologies and im is madridista.</span>
       top: 0; left: 0; right: 0; bottom: 0;
       border-radius: 12px;
       padding: 3px;
-      background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      background: linear-gradient(90deg, transparent 20%, #ffffff, transparent 80%) 0 0 / 200% 100% no-repeat;
+      -webkit-mask: linear-gradient(#fff700 0 0) content-box, linear-gradient(#ffff00 0 0);
       -webkit-mask-composite: destination-out;
       mask-composite: exclude;
       animation: run-around 3.5s linear infinite;
@@ -889,8 +1058,8 @@ various programming languages and technologies and im is madridista.</span>
         font-size: 1rem;
         font-weight: 600;
         margin: 0;
-        color: #e1e4e8;
-        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        color: #000000;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
       ">00:00:00</h2>
     </div>
   </div>
@@ -917,96 +1086,87 @@ various programming languages and technologies and im is madridista.</span>
     100% { background-position: 200% 0%; }
   }
 </style>
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
-
-
-            <div id="contrast-quote" style="
-  max-width: 600px;
-  margin: 2rem auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  user-select: none;
-  cursor: default;
-  font-size: 1.3rem;
-  font-style: italic;
-  line-height: 1.4;
-  transition: color 0.7s ease, opacity 0.8s ease;
-  opacity: 1;
+            <div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
 ">
-  <p id="quote-text" style="margin: 0 0 0.5rem 0;"></p>
-  <h3 id="quote-author" style="font-weight: 500; font-size: 1.05rem; margin: 0;"></h3>
+  <div class="quote-widget yelloworange-bg" style="
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    position: relative;
+    max-width: 320px;
+    text-align: center;
+    isolation: isolate;
+  ">
+    <span class="backlight" style="
+      content: ''; 
+      position: absolute; 
+      top:0; left:0; right:0; bottom:0;
+      border-radius:12px; padding:3px;
+      background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: run-around 3.5s linear infinite;
+      pointer-events: none; z-index:1;
+    "></span>
+    <div class="quote-text-box" style="
+      position: relative; z-index:2; 
+      font-size:1rem; line-height:1.5;
+      color:white; text-shadow:0 0 3px rgba(0,0,0,0.5);
+      transition: opacity 0.8s ease; opacity:1;
+    ">
+      <p id="quote-text" style="margin:0; font-style: italic;"></p>
+      <h3 id="quote-author" style="margin:0; font-weight:400; color:white; opacity:0.9;"></h3>
+    </div>
+  </div>
 </div>
 
+<style>
+@keyframes run-around {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.yelloworange-bg {
+  background: linear-gradient(135deg, #f9d423, #ff4e50) !important;
+}
+</style>
+
 <script>
-  (function(){
-    const quotes_en = [
-      {text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney"},
-      {text: "Don’t let yesterday take up too much of today.", author: "Will Rogers"},
-      {text: "It’s not whether you get knocked down, it’s whether you get up.", author: "Vince Lombardi"},
-      {text: "Success is not in what you have, but who you are.", author: "Bo Bennett"},
-      {text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt"}
-    ];
+(function(){
+  const quotes = [
+    {text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney"},
+    {text: "Don’t let yesterday take up too much of today.", author: "Will Rogers"},
+    {text: "It’s not whether you get knocked down, it’s whether you get up.", author: "Vince Lombardi"}
+  ];
 
-    const quotes_id = [
-      {text: "Cara terbaik untuk memulai adalah berhenti bicara dan mulai bertindak.", author: "Walt Disney"},
-      {text: "Jangan biarkan kemarin mengambil terlalu banyak hari ini.", author: "Will Rogers"},
-      {text: "Bukan soal seberapa keras kamu terjatuh, tapi seberapa kuat kamu bangkit.", author: "Vince Lombardi"},
-      {text: "Kesuksesan bukan pada apa yang kamu miliki, tapi siapa dirimu.", author: "Bo Bennett"},
-      {text: "Masa depan adalah milik mereka yang percaya pada keindahan mimpi mereka.", author: "Eleanor Roosevelt"}
-    ];
-
-    const container = document.getElementById('contrast-quote');
+  let index = 0;
+  function showQuote() {
     const textEl = document.getElementById('quote-text');
     const authorEl = document.getElementById('quote-author');
+    textEl.parentElement.style.opacity = 0;
 
-    function getLuminance(rgb) {
-      const parts = rgb.match(/\d+/g).map(Number);
-      const [r, g, b] = parts.map(v => v / 255);
-      const a = [r,g,b].map(v =>
-        v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4)
-      );
-      return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
-    }
+    setTimeout(() => {
+      const quote = quotes[index % quotes.length];
+      textEl.textContent = `"${quote.text}"`;
+      authorEl.textContent = `— ${quote.author}`;
+      textEl.parentElement.style.opacity = 1;
+      index++;
+    }, 800);
+  }
 
-    function getContrastColor(bgRgb) {
-      return getLuminance(bgRgb) > 0.179 ? '#000000' : '#ffffff';
-    }
-
-    function updateTextColor() {
-      let bgColor = window.getComputedStyle(container.parentElement).backgroundColor;
-      if(!bgColor || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent'){
-        bgColor = window.getComputedStyle(document.body).backgroundColor;
-      }
-      const textColor = getContrastColor(bgColor);
-      textEl.style.color = textColor;
-      authorEl.style.color = textColor;
-    }
-
-    let index = 0;
-    function showQuote() {
-      container.style.opacity = 0;
-
-      setTimeout(() => {
-        // Ganti bahasa berdasarkan index ganjil/genap, atau bisa juga random
-        const useEnglish = index % 2 === 0; // even = english, odd = indonesia
-
-        const quote = useEnglish ? quotes_en[index % quotes_en.length] : quotes_id[index % quotes_id.length];
-
-        textEl.textContent = `"${quote.text}"`;
-        authorEl.textContent = `— ${quote.author}`;
-
-        updateTextColor();
-        container.style.opacity = 1;
-        index++;
-      }, 800);
-    }
-
-    showQuote();
-    setInterval(showQuote, 7000);
-
-    window.addEventListener('resize', updateTextColor);
-  })();
+  showQuote();
+  setInterval(showQuote, 7000);
+})();
 </script>
+
            <div class="quote-component">
   <div class="quote-widget">
     <span class="backlight"></span>
@@ -1034,7 +1194,7 @@ various programming languages and technologies and im is madridista.</span>
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    background: #123767;
+    background: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     max-width: 340px;
@@ -1048,8 +1208,8 @@ various programming languages and technologies and im is madridista.</span>
     top: 0; left: 0; right: 0; bottom: 0;
     border-radius: 12px;
     padding: 3px;
-    background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    background: linear-gradient(90deg, transparent 20%, #ff0000, transparent 80%) 0 0 / 200% 100% no-repeat;
+    -webkit-mask: linear-gradient(#000000 0 0) content-box, linear-gradient(#ff0000 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
     animation: run-around 3.5s linear infinite;
@@ -1060,10 +1220,10 @@ various programming languages and technologies and im is madridista.</span>
   .quote-text-box {
     position: relative;
     z-index: 2;
-    color: #e1e4e8;
+    color: #000000;
     font-size: 1.05rem;
     line-height: 1.5;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    
   }
 
   .quote-text {
@@ -1094,133 +1254,7 @@ various programming languages and technologies and im is madridista.</span>
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
-            <!-- Laptop Terminal Taller -->
-<div style="display: flex; justify-content: center; margin: 40px 0;">
-  <div style="width: 280px; height: 200px; transform-style: preserve-3d;">
-    <!-- Screen -->
-    <div style="position: relative; width: 280px; height: 160px; transform: rotateX(-25deg); background: linear-gradient(145deg, #252734, #1b1c22); border-radius: 10px 10px 0 0; box-shadow: 0 4px 9px rgba(0,0,0,0.5), inset 0 0 8px #0007; overflow: hidden;">
-      <div style="position: absolute; inset: 10px; background: #0f1015; border-radius: 6px; box-shadow: inset 0 0 8px #000a, 0 1px 3px rgba(255,255,255,0.05);"></div>
-      <div style="position: absolute; inset: 14px; background: #12131b; border-radius: 4px; box-shadow: inset 0 0 6px #0009; overflow: hidden;">
-        <canvas id="canvas" width="252" height="132" style="width: 252px; height: 132px; border-radius: 4px; display: block; user-select: none;"></canvas>
-      </div>
-    </div>
-    <!-- Base -->
-    <div style="width: 280px; height: 40px; background: linear-gradient(135deg, #60636d, #a5a7b0); border-radius: 0 0 12px 12px; box-shadow: inset 3px 3px 7px #3a3c44, inset -3px -3px 7px #d6d8e0, 0 5px 10px rgba(0,0,0,0.4); position: relative;">
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 30px; border-radius: 0 0 8px 8px; background: linear-gradient(145deg, #858890, #6b6e75); box-shadow: inset 0 1px 1px #bfc1c7;">
-        <div style="display: grid; grid-template-columns: repeat(14, 1fr); grid-gap: 2px 3px; height: 22px; padding: 6px 12px;">
-          <div style="background:#cfd1d7;border-radius:3px;box-shadow:inset 0 1px 1px #fff,inset 0 -1px 1px #a3a5ab;"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-ctx.font = '13px "Courier New", monospace';
-ctx.textBaseline = 'top';
-
-const width = canvas.width;
-const height = canvas.height;
-const lineHeight = 16; // agak ditinggikan
-const marginLeft = 8;
-const marginTop = 8;
-
-const colors = {
-  keyword: '#ff79c6',
-  function: '#8be9fd',
-  string: '#f1fa8c',
-  normal: '#f8f8f2',
-};
-
-const codeLines = [
-  '<?php',
-  'function hack() {',
-  '  $data = $_POST["badfellasid"];',
-  '  if ($data === "nopassword") {',
-  '    echo "Access berhasil!";',
-  '  } else {',
-  '    echo "Access gagal!";',
-  '  }',
-  '}',
-  'hack();',
-  '// Initiating system checks...',
-  'system_check();',
-  'function system_check() {',
-  '  $firewall = true;',
-  '  if ($firewall) {',
-  '    echo "Firewall Diaktifkan\\n";',
-  '  } else {',
-  '    echo "Firewall Dimatikan\\n";',
-  '  }',
-  '}',
-  'echo "berhasil masuk, wellcome";',
-  '',
-  '░██████╗░██╗████████╗░█████╗░',
-  '██╔════╝░██║╚══██╔══╝██╔══██╗',
-  '██║░░██╗░██║░░░██║░░░███████║',
-  '██║░░╚██╗██║░░░██║░░░██╔══██║',
-  '╚██████╔╝██║░░░██║░░░██║░░██║',
-  '░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░░╚═╝'
-];
-
-
-function getColorForWord(word) {
-  const keywords = ['function','if','else','return','echo','<?php','true','false'];
-  const functions = ['hack','system_check','$_POST','echo'];
-  if (keywords.includes(word)) return colors.keyword;
-  if (functions.includes(word)) return colors.function;
-  if (/^".*"$/.test(word) || /^'.*'$/.test(word)) return colors.string;
-  return colors.normal;
-}
-
-let typedLines = [''], currentLine = 0, currentChar = 0;
-
-function draw() {
-  ctx.clearRect(0, 0, width, height);
-  let y = marginTop;
-  const maxLines = Math.floor((height - marginTop * 2) / lineHeight);
-  const startLine = Math.max(0, typedLines.length - maxLines);
-  for (let i = startLine; i < typedLines.length; i++) {
-    let x = marginLeft;
-    const parts = typedLines[i].split(/(\s+|[{}();=+\-*\/\[\]"\\\n])/).filter(p => p !== '');
-    for (let part of parts) {
-      ctx.fillStyle = getColorForWord(part);
-      ctx.fillText(part, x, y);
-      x += ctx.measureText(part).width;
-    }
-    y += lineHeight;
-  }
-}
-
-function type() {
-  if (currentLine >= codeLines.length) {
-    setTimeout(() => {
-      typedLines = [''];
-      currentLine = 0;
-      currentChar = 0;
-      draw();
-      type();
-    }, 1500);
-    return;
-  }
-  const line = codeLines[currentLine];
-  if (currentChar < line.length) {
-    typedLines[currentLine] = (typedLines[currentLine] || '') + line[currentChar];
-    currentChar++;
-    draw();
-    setTimeout(type, 30);
-  } else {
-    currentLine++;
-    typedLines.push('');
-    currentChar = 0;
-    draw();
-    setTimeout(type, 100);
-  }
-}
-type();
-</script>
+            
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
 
