@@ -349,6 +349,56 @@
 
 </body>
 </html>
+<div style="position:relative;width:200px;height:80px;margin:auto;">
+  <svg viewBox="0 0 500 200" style="position:absolute;top:0;left:0;width:100%;height:100%;" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="20%" stop-color="orange"/>
+        <stop offset="40%" stop-color="yellow"/>
+        <stop offset="60%" stop-color="lime"/>
+        <stop offset="80%" stop-color="cyan"/>
+        <stop offset="100%" stop-color="magenta"/>
+        <animateTransform attributeName="gradientTransform"
+          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
+      </linearGradient>
+
+      <mask id="maskLove">
+        <rect x="0" y="0" width="500" height="200" fill="white"/>
+        <path d="
+          M230 100
+          C225 95 220 85 210 95
+          C200 105 210 120 230 130
+          C250 120 260 105 250 95
+          C240 85 235 95 230 100
+        " fill="black"/>
+      </mask>
+    </defs>
+
+    <path d="
+      M0 100 
+      L50 100 
+      L70 40 
+      L90 160 
+      L110 100 
+      L150 100 
+      L180 60 
+      L200 140 
+      L220 100 
+      L230 100
+      C225 95 220 85 210 95
+      C200 105 210 120 230 130
+      C250 120 260 105 250 95
+      C240 85 235 95 230 100
+      L300 100 
+      L320 40 
+      L340 160 
+      L360 100 
+      L500 100" 
+      stroke="url(#grad)" stroke-width="4" fill="none" mask="url(#maskLove)" />
+  </svg>
+</div>
+
 
         <p id="desc" style="margin-bottom: 30px;">
          <span class="shimmer-small-text"> I excel crafting elegant
@@ -847,7 +897,6 @@ various programming languages and technologies and im is madridista.</span>
 
             <!--=============== SERVICES ===============-->
             <div id="rm-scroll-photo-widget"></div>
-
 <script>
   (function() {
     const host = document.getElementById('rm-scroll-photo-widget');
@@ -895,222 +944,50 @@ various programming languages and technologies and im is madridista.</span>
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
-<div id="rm-slider-widget"></div>
 
-<script>
-(function() {
-  const host = document.getElementById('rm-slider-widget');
-  const shadow = host.attachShadow({ mode: 'open' });
-
-  shadow.innerHTML = `
-    <style>
-      .wrapper {
-        max-width: 1000px;
-        margin: 30px auto;
-        padding: 10px;
-        font-family: sans-serif;
-        user-select: none;
-      }
-      .title {
-        text-align: center;
-        font-size: 1.4rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        position: relative;
-        padding-bottom: 5px;
-        letter-spacing: 1px;
-        color: #000, #111;
-      }
-      .title::after {
-        content: '';
-        position: absolute;
-        width: 60%;
-        height: 2px;
-        left: 20%;
-        bottom: 0;
-        background: currentColor;
-        opacity: 0.6;
-      }
-      .slider-container {
-        overflow: hidden;
-        position: relative;
-      }
-      .slider {
-        display: flex;
-        transition: transform 0.3s ease;
-        cursor: grab;
-      }
-      .card {
-        flex: 0 0 100%;
-        padding: 5px;
-        box-sizing: border-box;
-      }
-      .card img {
-        width: 100%;
-        border-radius: 8px;
-      }
-      .card-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #000, #111;
-  margin: 5px 0 3px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-
-.card-desc {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color:zauto #000, #111;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-
-      .dots {
-        text-align: center;
-        margin-top: 8px;
-      }
-      .dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #bbb;
-        border-radius: 5px;
-        margin: 0 3px;
-        cursor: pointer;
-      }
-      .dot.active { background: #333; }
-
-      @media (min-width: 700px) {
-        .card { flex: 0 0 33.33%; }
-      }
-    </style>
-
-    <div class="wrapper">
-      <div class="title">Real Madrid News</div>
-      <div class="slider-container">
-        <div class="slider">
-           ${[
-            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--f6ec021d-c402-411a-ab3a-70e0ca3f3001/ND_LLEGADA_MIAMI_02_AV10788_2.webp?preferwebp=true&width=350", title: "Real Madrid is already in florida", desc: "NEWS-14/06/2025"},
-            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--09f5180f-1bdf-43fe-8d03-e84147e154ac/ND_LLEGADA_VINI_LUNIN_ARDA__AV11054.webp?preferwebp=true&width=350", title: " Vini Jr., Arda Güler and Lunin join the squad in Florida ", desc: "NEWS-14/06/2025"},
-            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--9f4e6c4a-7322-4540-9dc1-e6e389db1e2e/ND_MASTANTUONO_COMUNICADO_GettyImages_2216815105.webp?preferwebp=true&width=350", title: " Official Announcement: Mastantuono ", desc: "OFFICIAL ANNOUNCEMENT.13/06/2025"},
-            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--c3c3eedc-6ae7-4c02-938a-ae64d9ef5baf/ND_MASTANTUONO_ARGENTINA_GettyImages_2218215555.webp?preferwebp=true&width=350", title: " Mastantuono signs for Real Madrid ", desc: "NEWS.13/06/2025"},
-            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--ffd914a8-67f7-4889-b957-39177c53c4b8/ND_ENTREVISTA_ALEXANDER_ARNOLD_1PC0094.webp?preferwebp=true&width=400", title: " Alexander-Arnold: “Real Madrid is a team renowned for its success and for winning titles” ", desc: "NEWS-13/06/2025"}
-          ].map(item => `
-            <div class="card">
-              <img src="${item.img}" alt="">
-              <div class="card-title">${item.title}</div>
-              <div class="card-desc">${item.desc}</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-      <div class="dots"></div>
-    </div>
-  `;
-
-  const slider = shadow.querySelector('.slider');
-  const dotsContainer = shadow.querySelector('.dots');
-  const cards = shadow.querySelectorAll('.card');
-  let index = 0;
-  let slidesToShow = window.innerWidth >= 700 ? 3 : 1;
-  let totalSlides = cards.length - slidesToShow + 1;
-
-  function generateDots() {
-    dotsContainer.innerHTML = '';
-    totalSlides = cards.length - slidesToShow + 1;
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      if (i === index) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function goToSlide(i) {
-    index = Math.min(Math.max(i, 0), totalSlides - 1);
-    slider.style.transform = `translateX(-${index * (100 / slidesToShow)}%)`;
-    updateDots();
-  }
-
-  function updateDots() {
-    const dots = dotsContainer.querySelectorAll('.dot');
-    dots.forEach(d => d.classList.remove('active'));
-    if(dots[index]) dots[index].classList.add('active');
-  }
-
-  // Swipe / Drag function
-  let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, animationID;
-
-  const getX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-
-  const dragStart = (e) => {
-    isDragging = true;
-    startPos = getX(e);
-    animationID = requestAnimationFrame(animation);
-    slider.style.cursor = 'grabbing';
-  };
-
-  const dragMove = (e) => {
-    if (!isDragging) return;
-    const currentPos = getX(e);
-    currentTranslate = prevTranslate + currentPos - startPos;
-  };
-
-  const dragEnd = () => {
-    cancelAnimationFrame(animationID);
-    isDragging = false;
-    const movedBy = currentTranslate - prevTranslate;
-    const threshold = slider.offsetWidth / slidesToShow / 4;
-
-    if (movedBy < -threshold && index < totalSlides - 1) index++;
-    if (movedBy > threshold && index > 0) index--;
-
-    goToSlide(index);
-    prevTranslate = -index * (slider.offsetWidth / slidesToShow);
-    currentTranslate = prevTranslate;
-    slider.style.transition = 'transform 0.3s ease';
-    slider.style.transform = `translateX(${currentTranslate}px)`;
-    slider.style.cursor = 'grab';
-  };
-
-  const animation = () => {
-    slider.style.transform = `translateX(${currentTranslate}px)`;
-    if (isDragging) requestAnimationFrame(animation);
-  };
-
-  slider.addEventListener('mousedown', dragStart);
-  slider.addEventListener('touchstart', dragStart);
-  slider.addEventListener('mousemove', dragMove);
-  slider.addEventListener('touchmove', dragMove);
-  slider.addEventListener('mouseup', dragEnd);
-  slider.addEventListener('mouseleave', dragEnd);
-  slider.addEventListener('touchend', dragEnd);
-
-  window.addEventListener('resize', () => {
-    slidesToShow = window.innerWidth >= 700 ? 3 : 1;
-    generateDots();
-    goToSlide(index);
-  });
-
-  generateDots();
-  goToSlide(index);
-})();
-</script>
 
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
+<div class="modal-body">
+  <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="20%" stop-color="orange"/>
+        <stop offset="40%" stop-color="yellow"/>
+        <stop offset="60%" stop-color="lime"/>
+        <stop offset="80%" stop-color="cyan"/>
+        <stop offset="100%" stop-color="magenta"/>
+        <animateTransform attributeName="gradientTransform"
+          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
+      </linearGradient>
+    </defs>
+
+    <path d="
+      M0 100 
+      L50 100 
+      L70 40 
+      L90 160 
+      L110 100 
+      L150 100 
+      L180 60 
+      L200 140 
+      L220 100 
+      L300 100 
+      L320 40 
+      L340 160 
+      L360 100 
+      L500 100" />
+  </svg>
+</div>
+
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+
+
+
+
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
 
 <!-- Drawer Auto Height START -->
@@ -1259,6 +1136,56 @@ various programming languages and technologies and im is madridista.</span>
           pointer-events:none;z-index:1;"></span>
         <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
           <p style="margin:0;font-style:italic;">
+            <style>
+  .modal-body svg {
+    width: 100%;          /* isi penuh area modal */
+    max-width: 300px;     /* batas maksimum lebar SVG di modal */
+    height: auto;         /* proporsional, tidak gepeng */
+    display: block;       /* hilangkan celah inline */
+    margin: 0 auto;       /* tengahin di dalam modal */
+  }
+  .modal-body path {
+    fill: none;
+    stroke: url(#grad);
+    stroke-width: 4; /* kecilin dikit biar pas modal */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>
+
+<div class="modal-body">
+  <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="20%" stop-color="orange"/>
+        <stop offset="40%" stop-color="yellow"/>
+        <stop offset="60%" stop-color="lime"/>
+        <stop offset="80%" stop-color="cyan"/>
+        <stop offset="100%" stop-color="magenta"/>
+        <animateTransform attributeName="gradientTransform"
+          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
+      </linearGradient>
+    </defs>
+
+    <path d="
+      M0 100 
+      L50 100 
+      L70 40 
+      L90 160 
+      L110 100 
+      L150 100 
+      L180 60 
+      L200 140 
+      L220 100 
+      L300 100 
+      L320 40 
+      L340 160 
+      L360 100 
+      L500 100" />
+  </svg>
+</div>
+
             "Welcome to Home— Real Madrid [fitur dalam tahap maintenance]"<br>
             <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
           </p>
@@ -1283,6 +1210,7 @@ various programming languages and technologies and im is madridista.</span>
           pointer-events:none;z-index:1;"></span>
         <div style="position:relative;z-index:2;color:#000;font-size:1.05rem;line-height:1.5;">
           <p style="margin:0;font-style:italic;">
+            
             [fitur dalam tahap maintenance]<br>
             <span style="font-weight:400;">— realmadrid</span><br>
             <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="RM" style="width:40px;height:auto;margin-top:8px;">
@@ -1540,10 +1468,259 @@ various programming languages and technologies and im is madridista.</span>
 </style>
 
 
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+
+
+<div class="modal-body">
+  <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="20%" stop-color="orange"/>
+        <stop offset="40%" stop-color="yellow"/>
+        <stop offset="60%" stop-color="lime"/>
+        <stop offset="80%" stop-color="cyan"/>
+        <stop offset="100%" stop-color="magenta"/>
+        <animateTransform attributeName="gradientTransform"
+          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
+      </linearGradient>
+    </defs>
+
+    <path d="
+      M0 100 
+      L50 100 
+      L70 40 
+      L90 160 
+      L110 100 
+      L150 100 
+      L180 60 
+      L200 140 
+      L220 100 
+      L300 100 
+      L320 40 
+      L340 160 
+      L360 100 
+      L500 100" />
+  </svg>
+</div>
 
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
+
+<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+<div id="rm-slider-widget"></div>
+
+<script>
+(function() {
+  const host = document.getElementById('rm-slider-widget');
+  const shadow = host.attachShadow({ mode: 'open' });
+
+  shadow.innerHTML = `
+    <style>
+      .wrapper {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 10px;
+        font-family: sans-serif;
+        user-select: none;
+      }
+      .title {
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        position: relative;
+        padding-bottom: 5px;
+        letter-spacing: 1px;
+        color: #000, #111;
+      }
+      .title::after {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 2px;
+        left: 20%;
+        bottom: 0;
+        background: currentColor;
+        opacity: 0.6;
+      }
+      .slider-container {
+        overflow: hidden;
+        position: relative;
+      }
+      .slider {
+        display: flex;
+        transition: transform 0.3s ease;
+        cursor: grab;
+      }
+      .card {
+        flex: 0 0 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      .card img {
+        width: 100%;
+        border-radius: 8px;
+      }
+      .card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000, #111;
+  margin: 5px 0 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color:zauto #000, #111;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+      .dots {
+        text-align: center;
+        margin-top: 8px;
+      }
+      .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #bbb;
+        border-radius: 5px;
+        margin: 0 3px;
+        cursor: pointer;
+      }
+      .dot.active { background: #333; }
+
+      @media (min-width: 700px) {
+        .card { flex: 0 0 33.33%; }
+      }
+    </style>
+
+    <div class="wrapper">
+      <div class="title">Real Madrid News</div>
+      <div class="slider-container">
+        <div class="slider">
+           ${[
+            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--f6ec021d-c402-411a-ab3a-70e0ca3f3001/ND_LLEGADA_MIAMI_02_AV10788_2.webp?preferwebp=true&width=350", title: "Real Madrid is already in florida", desc: "NEWS-14/06/2025"},
+            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--09f5180f-1bdf-43fe-8d03-e84147e154ac/ND_LLEGADA_VINI_LUNIN_ARDA__AV11054.webp?preferwebp=true&width=350", title: " Vini Jr., Arda Güler and Lunin join the squad in Florida ", desc: "NEWS-14/06/2025"},
+            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--9f4e6c4a-7322-4540-9dc1-e6e389db1e2e/ND_MASTANTUONO_COMUNICADO_GettyImages_2216815105.webp?preferwebp=true&width=350", title: " Official Announcement: Mastantuono ", desc: "OFFICIAL ANNOUNCEMENT.13/06/2025"},
+            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--c3c3eedc-6ae7-4c02-938a-ae64d9ef5baf/ND_MASTANTUONO_ARGENTINA_GettyImages_2218215555.webp?preferwebp=true&width=350", title: " Mastantuono signs for Real Madrid ", desc: "NEWS.13/06/2025"},
+            {img: "https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--ffd914a8-67f7-4889-b957-39177c53c4b8/ND_ENTREVISTA_ALEXANDER_ARNOLD_1PC0094.webp?preferwebp=true&width=400", title: " Alexander-Arnold: “Real Madrid is a team renowned for its success and for winning titles” ", desc: "NEWS-13/06/2025"}
+          ].map(item => `
+            <div class="card">
+              <img src="${item.img}" alt="">
+              <div class="card-title">${item.title}</div>
+              <div class="card-desc">${item.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="dots"></div>
+    </div>
+  `;
+
+  const slider = shadow.querySelector('.slider');
+  const dotsContainer = shadow.querySelector('.dots');
+  const cards = shadow.querySelectorAll('.card');
+  let index = 0;
+  let slidesToShow = window.innerWidth >= 700 ? 3 : 1;
+  let totalSlides = cards.length - slidesToShow + 1;
+
+  function generateDots() {
+    dotsContainer.innerHTML = '';
+    totalSlides = cards.length - slidesToShow + 1;
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === index) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function goToSlide(i) {
+    index = Math.min(Math.max(i, 0), totalSlides - 1);
+    slider.style.transform = `translateX(-${index * (100 / slidesToShow)}%)`;
+    updateDots();
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    dots.forEach(d => d.classList.remove('active'));
+    if(dots[index]) dots[index].classList.add('active');
+  }
+
+  // Swipe / Drag function
+  let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, animationID;
+
+  const getX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+  const dragStart = (e) => {
+    isDragging = true;
+    startPos = getX(e);
+    animationID = requestAnimationFrame(animation);
+    slider.style.cursor = 'grabbing';
+  };
+
+  const dragMove = (e) => {
+    if (!isDragging) return;
+    const currentPos = getX(e);
+    currentTranslate = prevTranslate + currentPos - startPos;
+  };
+
+  const dragEnd = () => {
+    cancelAnimationFrame(animationID);
+    isDragging = false;
+    const movedBy = currentTranslate - prevTranslate;
+    const threshold = slider.offsetWidth / slidesToShow / 4;
+
+    if (movedBy < -threshold && index < totalSlides - 1) index++;
+    if (movedBy > threshold && index > 0) index--;
+
+    goToSlide(index);
+    prevTranslate = -index * (slider.offsetWidth / slidesToShow);
+    currentTranslate = prevTranslate;
+    slider.style.transition = 'transform 0.3s ease';
+    slider.style.transform = `translateX(${currentTranslate}px)`;
+    slider.style.cursor = 'grab';
+  };
+
+  const animation = () => {
+    slider.style.transform = `translateX(${currentTranslate}px)`;
+    if (isDragging) requestAnimationFrame(animation);
+  };
+
+  slider.addEventListener('mousedown', dragStart);
+  slider.addEventListener('touchstart', dragStart);
+  slider.addEventListener('mousemove', dragMove);
+  slider.addEventListener('touchmove', dragMove);
+  slider.addEventListener('mouseup', dragEnd);
+  slider.addEventListener('mouseleave', dragEnd);
+  slider.addEventListener('touchend', dragEnd);
+
+  window.addEventListener('resize', () => {
+    slidesToShow = window.innerWidth >= 700 ? 3 : 1;
+    generateDots();
+    goToSlide(index);
+  });
+
+  generateDots();
+  goToSlide(index);
+})();
+</script>
             
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
