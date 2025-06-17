@@ -896,7 +896,51 @@ various programming languages and technologies and im is madridista.</span>
 
 
             <!--=============== SERVICES ===============-->
+
+            <style>
+  .ecg-path {
+    stroke: url(#grad1);
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Animasi Gradient */
+  @keyframes moveGradient {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+
+  .gradient-move {
+    animation: moveGradient 4s linear infinite;
+  }
+</style>
+
+<!-- ECG Detak Jantung -->
+<div class="modal-body">
+  <svg class="ecg-svg" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="20%" stop-color="orange"/>
+        <stop offset="40%" stop-color="yellow"/>
+        <stop offset="60%" stop-color="lime"/>
+        <stop offset="80%" stop-color="cyan"/>
+        <stop offset="100%" stop-color="magenta"/>
+      </linearGradient>
+      <!-- Trik: Simpan gradien dalam pattern -->
+      <pattern id="pattern1" patternUnits="userSpaceOnUse" width="500" height="200">
+        <rect class="gradient-move" width="500" height="200" fill="url(#grad1)" />
+      </pattern>
+    </defs>
+    <path d="M0 100 L50 100 L70 40 L90 160 L110 100 L150 100 L180 60 L200 140 L220 100 L300 100 L320 40 L340 160 L360 100 L500 100"
+      stroke="url(#pattern1)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</div>
+
             <div id="rm-scroll-photo-widget"></div>
+
 <script>
   (function() {
     const host = document.getElementById('rm-scroll-photo-widget');
@@ -949,45 +993,6 @@ various programming languages and technologies and im is madridista.</span>
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
-<div class="modal-body">
-  <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
-        <stop offset="0%" stop-color="red"/>
-        <stop offset="20%" stop-color="orange"/>
-        <stop offset="40%" stop-color="yellow"/>
-        <stop offset="60%" stop-color="lime"/>
-        <stop offset="80%" stop-color="cyan"/>
-        <stop offset="100%" stop-color="magenta"/>
-        <animateTransform attributeName="gradientTransform"
-          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
-      </linearGradient>
-    </defs>
-
-    <path d="
-      M0 100 
-      L50 100 
-      L70 40 
-      L90 160 
-      L110 100 
-      L150 100 
-      L180 60 
-      L200 140 
-      L220 100 
-      L300 100 
-      L320 40 
-      L340 160 
-      L360 100 
-      L500 100" />
-  </svg>
-</div>
-
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
-
-
-
-
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
 
 <!-- Drawer Auto Height START -->
@@ -1468,44 +1473,6 @@ various programming languages and technologies and im is madridista.</span>
 </style>
 
 
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
-
-
-<div class="modal-body">
-  <svg viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
-        <stop offset="0%" stop-color="red"/>
-        <stop offset="20%" stop-color="orange"/>
-        <stop offset="40%" stop-color="yellow"/>
-        <stop offset="60%" stop-color="lime"/>
-        <stop offset="80%" stop-color="cyan"/>
-        <stop offset="100%" stop-color="magenta"/>
-        <animateTransform attributeName="gradientTransform"
-          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
-      </linearGradient>
-    </defs>
-
-    <path d="
-      M0 100 
-      L50 100 
-      L70 40 
-      L90 160 
-      L110 100 
-      L150 100 
-      L180 60 
-      L200 140 
-      L220 100 
-      L300 100 
-      L320 40 
-      L340 160 
-      L360 100 
-      L500 100" />
-  </svg>
-</div>
-
-
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
 
 
 <div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
