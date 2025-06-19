@@ -349,55 +349,7 @@
 
 </body>
 </html>
-<div style="position:relative;width:200px;height:80px;margin:auto;">
-  <svg viewBox="0 0 500 200" style="position:absolute;top:0;left:0;width:100%;height:100%;" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
-        <stop offset="0%" stop-color="red"/>
-        <stop offset="20%" stop-color="orange"/>
-        <stop offset="40%" stop-color="yellow"/>
-        <stop offset="60%" stop-color="lime"/>
-        <stop offset="80%" stop-color="cyan"/>
-        <stop offset="100%" stop-color="magenta"/>
-        <animateTransform attributeName="gradientTransform"
-          type="translate" from="-1,0" to="1,0" dur="4s" repeatCount="indefinite" />
-      </linearGradient>
 
-      <mask id="maskLove">
-        <rect x="0" y="0" width="500" height="200" fill="white"/>
-        <path d="
-          M230 100
-          C225 95 220 85 210 95
-          C200 105 210 120 230 130
-          C250 120 260 105 250 95
-          C240 85 235 95 230 100
-        " fill="black"/>
-      </mask>
-    </defs>
-
-    <path d="
-      M0 100 
-      L50 100 
-      L70 40 
-      L90 160 
-      L110 100 
-      L150 100 
-      L180 60 
-      L200 140 
-      L220 100 
-      L230 100
-      C225 95 220 85 210 95
-      C200 105 210 120 230 130
-      C250 120 260 105 250 95
-      C240 85 235 95 230 100
-      L300 100 
-      L320 40 
-      L340 160 
-      L360 100 
-      L500 100" 
-      stroke="url(#grad)" stroke-width="4" fill="none" mask="url(#maskLove)" />
-  </svg>
-</div>
 
 
         <p id="desc" style="margin-bottom: 30px;">
@@ -900,64 +852,160 @@ various programming languages and technologies and im is madridista.</span>
             
             <!--=============== led running text ===============-->
 
+
             <!--=============== LOGO MADRID ===============-->
+<div class="fade-up">
 
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
-
-
-
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
-
-            <div id="rm-scroll-photo-widget"></div>
+<div id="rm-scroll-photo-widget"></div>
 
 <script>
-  (function() {
-    const host = document.getElementById('rm-scroll-photo-widget');
-    const shadow = host.attachShadow({ mode: 'open' });
+(function() {
+  const host = document.getElementById('rm-scroll-photo-widget');
+  const shadow = host.attachShadow({ mode: 'open' });
 
-    shadow.innerHTML = `
-      <style>
-        .container {
-          width: 100px;
-          height: 150px;
-          margin: 0 auto; /* Tanpa jarak atas bawah */
-          position: relative;
-        }
-        .photo {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          transition: clip-path 0.5s ease;
-          clip-path: inset(50% 0 50% 0); /* Awal tertutup */
-        }
-        .reveal {
-          clip-path: inset(0 0 0 0); /* Full buka */
-        }
-      </style>
-      <div class="container">
-        <img class="photo" src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid">
-      </div>
-    `;
+  const topLogoSrc1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/2025_FIFA_Club_World_Cup.svg/400px-2025_FIFA_Club_World_Cup.svg.png?20241105184725";
+  const topLogoSrc2 = "CABECERA_PARCHE_15_nuevo.jpeg";
+  const bottomLogoSrc = "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg";
 
-    const img = shadow.querySelector('.photo');
-    const container = shadow.querySelector('.container');
-
-    window.addEventListener('scroll', () => {
-      const rect = container.getBoundingClientRect();
-      const winH = window.innerHeight;
-
-      if (rect.top < winH/2 && rect.bottom > winH/2) {
-        img.classList.add('reveal');
-      } else {
-        img.classList.remove('reveal');
+  shadow.innerHTML = `
+    <style>
+      .box {
+        width: 120px;
+        margin: 30px auto;
+        border: 2px solid currentColor;
+        border-radius: 6px;
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        overflow: visible; /* biar logo bebas nafas */
       }
-    });
-  })();
+      .run-top, .run-bottom {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.8) 25%, rgba(255,255,255,0.8) 50%, rgba(255,165,0,0.8) 75%, transparent 100%);
+        background-size: 200% 100%;
+        animation: run-h 4s linear infinite;
+        pointer-events: none;
+      }
+      .run-top { top: -2px; }
+      .run-bottom { bottom: -2px; animation-direction: reverse; }
+      .run-left, .run-right {
+        position: absolute;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent 0%, rgba(255,215,0,0.8) 25%, rgba(255,255,255,0.8) 50%, rgba(255,165,0,0.8) 75%, transparent 100%);
+        background-size: 100% 200%;
+        animation: run-v 4s linear infinite;
+        pointer-events: none;
+      }
+      .run-left { left: -2px; animation-direction: reverse; }
+      .run-right { right: -2px; }
+
+      .photo {
+        width: 75%;
+        height: auto;
+        object-fit: contain;
+        transition: clip-path 0.5s ease;
+        clip-path: inset(50% 0 50% 0);
+        z-index: 1;
+      }
+      .photo.reveal {
+        clip-path: inset(0 0 0 0);
+      }
+      .logo-bottom {
+        margin-bottom: 4px;
+      }
+      @media (prefers-color-scheme: dark) { .box { color: #fff; } }
+      @media (prefers-color-scheme: light) { .box { color: #000; } }
+
+      @keyframes run-h {
+        0% {background-position:200% 0;}
+        100% {background-position:-200% 0;}
+      }
+      @keyframes run-v {
+        0% {background-position:0 200%;}
+        100% {background-position:0 -200%;}
+      }
+    </style>
+    <div class="box">
+      <div class="run-top"></div>
+      <div class="run-bottom"></div>
+      <div class="run-left"></div>
+      <div class="run-right"></div>
+
+      <img class="photo logo-top1" src="${topLogoSrc1}" alt="Logo Atas 1">
+      <img class="photo logo-top2" src="${topLogoSrc2}" alt="Logo Atas 2">
+      <img class="photo logo-bottom" src="${bottomLogoSrc}" alt="Real Madrid">
+    </div>
+  `;
+
+  const img1 = shadow.querySelector('.logo-top1');
+  const img2 = shadow.querySelector('.logo-top2');
+  const img3 = shadow.querySelector('.logo-bottom');
+  const container = shadow.querySelector('.box');
+
+  window.addEventListener('scroll', () => {
+    const rect = container.getBoundingClientRect();
+    const winH = window.innerHeight;
+    if (rect.top < winH/2 && rect.bottom > winH/2) {
+      img1.classList.add('reveal');
+      img2.classList.add('reveal');
+      img3.classList.add('reveal');
+    } else {
+      img1.classList.remove('reveal');
+      img2.classList.remove('reveal');
+      img3.classList.remove('reveal');
+    }
+  });
+})();
 </script>
 
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+</div>
+<!--=============== Pembatas Halaman  ===============-->
+<div style="position:relative;width:80%;height:2px;margin:30px auto;">
+  <!-- Garis Utama -->
+  <div class="main-line" style="
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:2px;">
+  </div>
 
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+  <!-- Running Gradient Elegan di Bawah -->
+  <div style="
+    content:'';
+    position:absolute;
+    bottom:-4px; left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,transparent 0%, rgb(255, 255, 255) 25%, rgb(255, 255, 255) 50%, rgb(0, 0, 0) 75%, transparent 100%);
+    background-size:200% 100%;
+    animation:run 5s linear infinite;">
+  </div>
+</div>
+
+<style>
+  .main-line {
+    background:#000; /* Light mode: hitam */
+  }
+  @media (prefers-color-scheme: dark) {
+    .main-line { background:#fff; } /* Dark mode: putih */
+  }
+  @keyframes run {
+    0% {background-position:200% 0;}
+    100% {background-position:-200% 0;}
+  }
+</style>
+<!--=============== Pembatas Halaman  ===============-->
+
 
 <!--=============== DRAWER MODAL GUA ===============-->
 
@@ -1267,7 +1315,7 @@ various programming languages and technologies and im is madridista.</span>
             
 
 <!--=============== QUOTE MADRID ===============-->
-
+<div class="fade-up">
 <style>
   @keyframes run-around {
     0% { background-position: 0% 0%; }
@@ -1354,7 +1402,8 @@ various programming languages and technologies and im is madridista.</span>
   setInterval(showQuote, 7000);
 })();
 </script>
-
+</div>
+<div class="fade-up">
            <div class="quote-component">
   <div class="quote-widget">
     <span class="backlight"></span>
@@ -1437,7 +1486,7 @@ various programming languages and technologies and im is madridista.</span>
     }
   }
 </style>
-
+</div>
 
 
 <!--=============== MADRID INFO ===============-->
@@ -1652,11 +1701,60 @@ various programming languages and technologies and im is madridista.</span>
 
   generateDots();
   goToSlide(index);
+  // Auto Slide Tambahan (Aman)
+let autoSlideInterval = setInterval(() => {
+  index = (index + 1) % totalSlides;
+  goToSlide(index);
+}, 3000); // 3000ms = 3 detik
+
+// Reset Auto Slide kalau user drag / klik dot
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(() => {
+    index = (index + 1) % totalSlides;
+    goToSlide(index);
+  }, 3000);
+}
+
+dotsContainer.addEventListener('click', resetAutoSlide);
+slider.addEventListener('mousedown', resetAutoSlide);
+slider.addEventListener('touchstart', resetAutoSlide);
+
 })();
 </script>
-            
-<div style="height:2px; background:linear-gradient(to right, transparent, currentColor, transparent); opacity:0.3; mix-blend-mode:difference; margin:2rem 0;"></div>
+<div style="position:relative;width:80%;height:2px;margin:30px auto;">
+  <!-- Garis Utama -->
+  <div class="main-line" style="
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:2px;">
+  </div>
 
+  <!-- Running Gradient Elegan di Bawah -->
+  <div style="
+    content:'';
+    position:absolute;
+    bottom:-4px; left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,transparent 0%, rgb(252, 252, 252) 25%, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0.5) 75%, transparent 100%);
+    background-size:200% 100%;
+    animation:run 5s linear infinite;">
+  </div>
+</div>
+
+<style>
+  .main-line {
+    background:#000; /* Light mode: hitam */
+  }
+  @media (prefers-color-scheme: dark) {
+    .main-line { background:#fff; } /* Dark mode: putih */
+  }
+  @keyframes run {
+    0% {background-position:200% 0;}
+    100% {background-position:-200% 0;}
+  }
+</style>
 <!--=============== MYLIVE ===============-->
 
             <section class="services section container" id="services">
