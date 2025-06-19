@@ -869,6 +869,35 @@ various programming languages and technologies and im is madridista.</span>
 
   shadow.innerHTML = `
     <style>
+      .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .text {
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        writing-mode: vertical-rl; /* Text vertikal */
+        line-height: 1;
+        color: #000000 !important; /* Selalu Hitam */
+      }
+      .left-text {
+        transform: rotate(180deg);
+        position: absolute;
+        left: calc(50% - 60px - 18px); /* dekat kiri kotak */
+        top: 50%;
+        transform: translateY(-50%) rotate(180deg);
+      }
+      .right-text {
+        transform: none;
+        position: absolute;
+        left: calc(50% + 60px + 2px); /* dekat kanan kotak */
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
       .box {
         width: 120px;
         margin: 30px auto;
@@ -883,7 +912,7 @@ various programming languages and technologies and im is madridista.</span>
         justify-content: center;
         align-items: center;
         gap: 8px;
-        overflow: visible; /* biar logo bebas nafas */
+        overflow: visible;
       }
       .run-top, .run-bottom {
         position: absolute;
@@ -924,8 +953,6 @@ various programming languages and technologies and im is madridista.</span>
       .logo-bottom {
         margin-bottom: 4px;
       }
-      @media (prefers-color-scheme: dark) { .box { color: #fff; } }
-      @media (prefers-color-scheme: light) { .box { color: #000; } }
 
       @keyframes run-h {
         0% {background-position:200% 0;}
@@ -936,15 +963,19 @@ various programming languages and technologies and im is madridista.</span>
         100% {background-position:0 -200%;}
       }
     </style>
-    <div class="box">
-      <div class="run-top"></div>
-      <div class="run-bottom"></div>
-      <div class="run-left"></div>
-      <div class="run-right"></div>
+    <div class="wrapper">
+      <div class="text left-text">REAL MADRID</div>
+      <div class="box">
+        <div class="run-top"></div>
+        <div class="run-bottom"></div>
+        <div class="run-left"></div>
+        <div class="run-right"></div>
 
-      <img class="photo logo-top1" src="${topLogoSrc1}" alt="Logo Atas 1">
-      <img class="photo logo-top2" src="${topLogoSrc2}" alt="Logo Atas 2">
-      <img class="photo logo-bottom" src="${bottomLogoSrc}" alt="Real Madrid">
+        <img class="photo logo-top1" src="${topLogoSrc1}" alt="Logo Atas 1">
+        <img class="photo logo-top2" src="${topLogoSrc2}" alt="Logo Atas 2">
+        <img class="photo logo-bottom" src="${bottomLogoSrc}" alt="Real Madrid">
+      </div>
+      <div class="text right-text">REAL MADRID</div>
     </div>
   `;
 
@@ -968,6 +999,7 @@ various programming languages and technologies and im is madridista.</span>
   });
 })();
 </script>
+
 
 </div>
 <!--=============== Pembatas Halaman  ===============-->
