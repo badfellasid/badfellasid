@@ -898,7 +898,44 @@ Swal.fire({
 
 
 
-            <!--=============== LOGO MADRID ===============-->
+            <!--=============== pembatas ===============-->
+
+            <div style="position:relative;width:80%;height:2px;margin:30px auto;">
+  <!-- Garis Utama -->
+  <div class="main-line" style="
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:2px;">
+  </div>
+
+  <!-- Running Gradient Elegan di Bawah -->
+  <div style="
+    content:'';
+    position:absolute;
+    bottom:-4px; left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,transparent 0%, rgb(255, 255, 255) 25%, rgb(255, 255, 255) 50%, rgb(255, 221, 0) 75%, transparent 100%);
+    background-size:200% 100%;
+    animation:run 5s linear infinite;">
+  </div>
+</div>
+
+<style>
+  .main-line {
+    background:#000; /* Light mode: hitam */
+  }
+  @media (prefers-color-scheme: dark) {
+    .main-line { background:#fff; } /* Dark mode: putih */
+  }
+  @keyframes run {
+    0% {background-position:-200% 0;}
+    100% {background-position:200% 0;}
+  }
+</style>
+
+<!--=============== LOGO MADRID ===============-->
+
 <div class="fade-up">
 
 <div id="rm-scroll-photo-widget"></div>
