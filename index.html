@@ -851,6 +851,18 @@ various programming languages and technologies and im is madridista.</span>
 
             
             <!--=============== led running text ===============-->
+<audio id="bg-music" loop>
+  <source src="aa.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('click', function once() {
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0.5;
+  audio.play();
+  document.removeEventListener('click', once); // hanya aktif sekali
+});
+</script>
 
 
             <!--=============== LOGO MADRID ===============-->
@@ -975,7 +987,7 @@ various programming languages and technologies and im is madridista.</span>
         <img class="photo logo-top2" src="${topLogoSrc2}" alt="Logo Atas 2">
         <img class="photo logo-bottom" src="${bottomLogoSrc}" alt="Real Madrid">
       </div>
-      <div class="text right-text">C A M P E ONE S</div>
+      <div class="text right-text">THE CAMPEONES</div>
     </div>
   `;
 
