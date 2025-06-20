@@ -855,25 +855,47 @@ various programming languages and technologies and im is madridista.</span>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 Swal.fire({
-    title: 'putar musiknya sekarang?',
+    title: 'Putar musiknya sekarang?',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Yes',
     cancelButtonText: 'No',
+    customClass: {
+        popup: 'custom-swal-popup',
+        title: 'custom-swal-title',
+        confirmButton: 'custom-swal-btn',
+        cancelButton: 'custom-swal-btn'
+    }
 }).then((result) => {
     const music = document.getElementById('bg-music');
     if (result.isConfirmed) {
         music.volume = 0.5;
         music.play();
     }
-    // Jalankan animasi kamu di sini kalau mau:
     if(document.querySelector('.container')){
         document.querySelector('.container').style.visibility = 'visible';
     }
 });
 </script>
+<style>
+.custom-swal-popup {
+    width: 260px !important;  /* Lebih kecil dari default */
+    padding: 10px !important;
+    font-size: 14px !important;
+}
+
+.custom-swal-title {
+    font-size: 16px !important;
+}
+
+.custom-swal-btn {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+}
+</style>
+
 
 
             <!--=============== LOGO MADRID ===============-->
