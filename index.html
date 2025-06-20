@@ -851,32 +851,27 @@ various programming languages and technologies and im is madridista.</span>
 
             
             <!--=============== led running text ===============-->
-<!-- Musik Autoplay dengan SweetAlert2 (Inline & Aman untuk Web-mu) -->
-<audio id="bg-music" loop>
-  <source src="aa.mp3" type="audio/mpeg">
-  Browser tidak mendukung audio.
-</audio>
-
+<audio id="bg-music" src="aa.mp3" loop></audio>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-// Saat halaman selesai loading
-window.addEventListener('load', () => {
-  Swal.fire({
-    title: 'Putar musiknya sekarang?',
-    text: 'Klik Yes untuk mulai musik',
-    icon: 'question',
+Swal.fire({
+    title: 'putar musiknya sekarang?',
+    icon: 'warning',
     showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
     confirmButtonText: 'Yes',
     cancelButtonText: 'No',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33'
-  }).then((result) => {
-    const audio = document.getElementById('bg-music');
-    audio.volume = 0.5; // Volume 50%
+}).then((result) => {
+    const music = document.getElementById('bg-music');
     if (result.isConfirmed) {
-      audio.play().catch(e => console.log('Autoplay error:', e));
+        music.volume = 0.5;
+        music.play();
     }
-  });
+    // Jalankan animasi kamu di sini kalau mau:
+    if(document.querySelector('.container')){
+        document.querySelector('.container').style.visibility = 'visible';
+    }
 });
 </script>
 
