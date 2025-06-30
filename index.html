@@ -773,13 +773,13 @@ various programming languages and technologies and im is madridista.</span>
     <span class="backlight"></span>
 
     <div class="music-player">
-      <p>Now Playing</p>
+      <p>sedang diputar</p>
       <h2 id="track-name">Track 1</h2>
       <div class="music-info" id="track-time">00:00 / 00:00</div>
       <div class="music-controls">
-        <button onclick="prevTrack()">⏮</button>
-        <button onclick="togglePlayPause()" id="play-btn">▶</button>
-        <button onclick="nextTrack()">⏭</button>
+        <button onclick="prevTrack()">◁</button>
+        <button onclick="togglePlayPause()" id="play-btn">||</button>
+        <button onclick="nextTrack()">▷</button>
       </div>
     </div>
   </div>
@@ -859,7 +859,7 @@ various programming languages and technologies and im is madridista.</span>
   top: 0; left: 0; right: 0; bottom: 0;
   border-radius: 12px;
   padding: 3px;
-  background: linear-gradient(90deg, transparent 20%, #fff, transparent 80%) 0 0 / 200% 100% no-repeat;
+  background: linear-gradient(90deg, transparent 20%, #ffd000, transparent 80%) 0 0 / 200% 100% no-repeat;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
@@ -877,9 +877,9 @@ various programming languages and technologies and im is madridista.</span>
 
 <script>
   const tracks = [
-    { name: "Track 1", src: "aa.mp3" },
-    { name: "Track 2", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-    { name: "Track 3", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+    { name: "hala madrid, ya nada mas", src: "aa.mp3" },
+    { name: "unknown", src: "-" },
+    { name: "hala madrid, ya nada mas0", src: "aa.mp3" }
   ];
 
   let currentTrack = 0;
@@ -1039,7 +1039,142 @@ various programming languages and technologies and im is madridista.</span>
 
             <!--=============== pembatas ===============-->
 
-            
+            <!-- Welcome Overlay -->
+<div id="welcome-overlay" style="position:fixed;inset:0;background:rgba(0, 0, 0, 0.8);backdrop-filter:blur(6px);display:flex;justify-content:center;align-items:center;z-index:9999;flex-direction:column;gap:1rem;">
+  <div id="welcome-content" style="padding:1.5rem 2rem;border-radius:16px;text-align:center;color:#000000;max-width:300px;transition:opacity 0.6s ease;border:1px solid rgba(0,0,0,0.1);box-shadow:0 0 20px rgba(255, 255, 255, 0);background:#c5c3c300;">
+    
+    <!-- Puzzle Logo -->
+    <div class="puzzle-container" style="margin-bottom:1rem;">
+      <div class="piece" style="--x: 0; --y: 0;"></div>
+      <div class="piece" style="--x: 1; --y: 0;"></div>
+      <div class="piece" style="--x: 2; --y: 0;"></div>
+      <div class="piece" style="--x: 0; --y: 1;"></div>
+      <div class="piece" style="--x: 1; --y: 1;"></div>
+      <div class="piece" style="--x: 2; --y: 1;"></div>
+      <div class="piece" style="--x: 0; --y: 2;"></div>
+      <div class="piece" style="--x: 1; --y: 2;"></div>
+      <div class="piece" style="--x: 2; --y: 2;"></div>
+    </div>
+
+    <h2 id="welcome-title" style="font-size:1.3rem;margin:0.5rem 0;">Selamat Datang!</h2>
+    <p id="welcome-subtitle" style="font-size:0.85rem;color:#ffffff;margin-bottom:0.5rem;">Hala Madrid y Nada Más</p>
+  </div>
+
+  <!-- Loading Animated -->
+  <div id="wave-loading" style="display:none;font-family:'Segoe UI',sans-serif;font-weight:bold;font-size:1.2rem;letter-spacing:2px;">
+    <span class="wave">L</span>
+    <span class="wave">O</span>
+    <span class="wave">A</span>
+    <span class="wave">D</span>
+    <span class="wave">I</span>
+    <span class="wave">N</span>
+    <span class="wave">G</span>
+  </div>
+</div>
+
+<!-- Puzzle Logo Style -->
+<style>
+.puzzle-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.piece {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg');
+  background-size: 120px 120px;
+  background-repeat: no-repeat;
+  top: calc(var(--y) * var(--size));
+  left: calc(var(--x) * var(--size));
+  background-position: calc(var(--x) * -40px) calc(var(--y) * -40px);
+  animation: puzzleCycle 5s ease-in-out forwards;
+  animation-delay: calc((var(--x) + var(--y)) * 0.1s);
+  z-index: 1;
+  opacity: 1;
+}
+
+@keyframes puzzleCycle {
+  0%, 25% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  30%, 60% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
+/* Loading Wave Effect */
+#wave-loading .wave {
+  display: inline-block;
+  animation: wave 1.3s ease-in-out infinite;
+}
+#wave-loading .wave:nth-child(1) { animation-delay: 0s; }
+#wave-loading .wave:nth-child(2) { animation-delay: 0.1s; }
+#wave-loading .wave:nth-child(3) { animation-delay: 0.2s; }
+#wave-loading .wave:nth-child(4) { animation-delay: 0.3s; }
+#wave-loading .wave:nth-child(5) { animation-delay: 0.4s; }
+#wave-loading .wave:nth-child(6) { animation-delay: 0.5s; }
+#wave-loading .wave:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes wave {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-8px); opacity: 1; }
+}
+</style>
+
+<!-- Script -->
+<script>
+  document.body.style.overflow = 'hidden';
+  const pieces = document.querySelectorAll('.piece');
+  pieces.forEach(piece => {
+    const dx = (Math.random() - 0.5) * 120 + 'px';
+    const dy = (Math.random() - 0.5) * 120 + 'px';
+    piece.style.setProperty('--dx', dx);
+    piece.style.setProperty('--dy', dy);
+  });
+
+  const welcomeText = document.getElementById('welcome-title');
+  const welcomeSub = document.getElementById('welcome-subtitle');
+  const welcomeContent = document.getElementById('welcome-content');
+  const waveLoading = document.getElementById('wave-loading');
+  const overlay = document.getElementById('welcome-overlay');
+
+  // 1. Fade out text
+  setTimeout(() => {
+    welcomeText.style.transition = 'opacity 0.5s ease';
+    welcomeSub.style.transition = 'opacity 0.5s ease';
+    welcomeText.style.opacity = '0';
+    welcomeSub.style.opacity = '0';
+    welcomeContent.style.opacity = '0';
+  }, 2000);
+
+  // 2. Show loading after puzzle destroyed
+  setTimeout(() => {
+    welcomeContent.remove();
+    waveLoading.style.display = 'block';
+  }, 2800);
+
+  // 3. Remove overlay after loading
+  setTimeout(() => {
+    overlay.style.transition = 'opacity 0.6s ease';
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }, 600);
+  }, 5000); // total delay ~5s
+</script>
+
 
 <!--=============== LOGO MADRID ===============-->
 
