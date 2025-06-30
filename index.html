@@ -785,7 +785,7 @@ various programming languages and technologies and im is madridista.</span>
   </div>
 </div>
 
-<audio id="audio-player" src=""></audio>
+<audio id="audio-player" src="nusan.mp3"></audio>
 
 <style>
 
@@ -877,8 +877,8 @@ various programming languages and technologies and im is madridista.</span>
 
 <script>
   const tracks = [
-    { name: "hala madrid, ya nada mas", src: "aa.mp3" },
-    { name: "Nusantara", src: "nusan.mp3" }
+    { name: "nusantara", src: "nusan.mp3" },
+    { name: "hala madrid, ya nada mas", src: "aa.mp3" }
   ];
 
   let currentTrack = 0;
@@ -930,6 +930,7 @@ various programming languages and technologies and im is madridista.</span>
   audio.addEventListener("ended", nextTrack);
   audio.addEventListener("loadeddata", updateTime);
   audio.addEventListener("play", updateTime);
+loadTrack(currentTrack);
 
   
 </script>
