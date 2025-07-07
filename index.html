@@ -769,17 +769,31 @@ various programming languages and technologies and im is madridista.</span>
     counters.sales.value = count;
   });
 </script>
-<div id="music-widget">
-    <span class="backlight"></span>
+<!-- Saklar + Widget Musik -->
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+  <!-- Saklar Mini -->
+  <label style="position: relative; display: inline-block; width: 30px; height: 16px;">
+    <input type="checkbox" id="toggle-widget" style="opacity: 0; width: 0; height: 0;">
+    <span id="switch-bg" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 20px;"></span>
+    <span id="switch-knob" style="position: absolute; content: ''; height: 12px; width: 12px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%;"></span>
+  </label>
 
-    <div class="music-player">
-      <p>sedang diputar</p>
-      <h2 id="track-name"></h2>
-      <div class="music-info" id="track-time">00:00 / 00:00</div>
-      <div class="music-controls">
-        <button onclick="prevTrack()">◁</button>
-        <button onclick="togglePlayPause()" id="play-btn">||</button>
-        <button onclick="nextTrack()">▷</button>
+  <!-- Wrapper Widget -->
+  <div id="music-widget-wrapper" style="overflow: hidden; max-height: 0; transition: max-height 0.4s ease;">
+    <div id="music-widget">
+      <span class="backlight"></span>
+
+      <div class="music-player">
+        <p>sedang diputar</p>
+        <div class="scroll-wrapper">
+          <h2 id="track-name"></h2>
+        </div>
+        <div class="music-info" id="track-time">00:00 / 00:00</div>
+        <div class="music-controls">
+          <button onclick="prevTrack()">◁</button>
+          <button onclick="togglePlayPause()" id="play-btn">▶</button>
+          <button onclick="nextTrack()">▷</button>
+        </div>
       </div>
     </div>
   </div>
@@ -788,97 +802,100 @@ various programming languages and technologies and im is madridista.</span>
 <audio id="audio-player" src="nusan.mp3"></audio>
 
 <style>
+  #music-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    background: #272b33;
+    position: relative;
+    overflow: hidden;
+    width: 220px; /* Ukuran normal */
+  }
 
+  .music-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    z-index: 2;
+  }
 
+  .music-player p {
+    font-size: 0.7rem;
+    margin: 0 0 2px;
+    color: #e1e4e8;
+  }
 
-#music-widget {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  background: #272b33;
-  max-width: 220px;
-  position: relative;
-  overflow: hidden;
-}
+  .scroll-wrapper {
+    max-width: 180px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 
-.music-player {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  z-index: 2;
-}
+  .scroll-wrapper h2 {
+    font-size: 0.9rem;
+    margin: 0 0 2px;
+    color: #fff;
+    display: inline-block;
+  }
 
-.music-player p {
-  font-size: 0.7rem;
-  margin: 0 0 2px;
-  color: #e1e4e8;
-}
+  .music-info {
+    font-size: 0.65rem;
+    margin-bottom: 4px;
+    color: #ccc;
+  }
 
-.music-player h2 {
-  font-size: 0.9rem;
-  margin: 0 0 2px;
-  color: #fff;
-}
+  .music-controls {
+    display: flex;
+    gap: 6px;
+  }
 
-.music-info {
-  font-size: 0.65rem;
-  margin-bottom: 4px;
-  color: #ccc;
-}
+  .music-controls button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+    cursor: pointer;
+  }
 
-.music-controls {
-  display: flex;
-  gap: 6px;
-}
+  .music-controls button:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
 
-.music-controls button {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  border-radius: 6px;
-  padding: 3px 6px;
-  font-size: 0.7rem;
-  cursor: pointer;
-}
+  #music-widget > .backlight {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    padding: 3px;
+    background: linear-gradient(90deg, transparent 20%, #ffd000, transparent 80%) 0 0 / 200% 100% no-repeat;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: run-around 3.5s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-.music-controls button:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-#music-widget > .backlight {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 12px;
-  padding: 3px;
-  background: linear-gradient(90deg, transparent 20%, #ffd000, transparent 80%) 0 0 / 200% 100% no-repeat;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  animation: run-around 3.5s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes run-around {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
+  @keyframes run-around {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
 </style>
 
 <script>
   const tracks = [
     { name: "nusantara", src: "nusan.mp3" },
-    { name: "hala madrid, ya nada mas", src: "aa.mp3" }
+    { name: "hala madrid, ya nada mas", src: "aa.mp3" },
   ];
 
   let currentTrack = 0;
@@ -930,10 +947,28 @@ various programming languages and technologies and im is madridista.</span>
   audio.addEventListener("ended", nextTrack);
   audio.addEventListener("loadeddata", updateTime);
   audio.addEventListener("play", updateTime);
-loadTrack(currentTrack);
 
-  
+  // Saklar toggle
+  const toggle = document.getElementById("toggle-widget");
+  const wrapper = document.getElementById("music-widget-wrapper");
+  const knob = document.getElementById("switch-knob");
+  const bg = document.getElementById("switch-bg");
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      wrapper.style.maxHeight = "300px";
+      knob.style.transform = "translateX(14px)";
+      bg.style.backgroundColor = "#4caf50";
+      loadTrack(currentTrack);
+    } else {
+      wrapper.style.maxHeight = "0";
+      knob.style.transform = "translateX(0)";
+      bg.style.backgroundColor = "#ccc";
+      audio.pause();
+    }
+  });
 </script>
+
 
 <br>
 
@@ -1130,6 +1165,8 @@ loadTrack(currentTrack);
   0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
   30% { transform: translateY(-8px); opacity: 1; }
 }
+
+
 </style>
 
 <!-- Script -->
