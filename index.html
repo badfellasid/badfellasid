@@ -115,85 +115,138 @@
                 <a href="#" class="button button__header">WELLCOME</a>
             </nav>
             
-<div class="container">
-  <a class="link-dark navbar-brand site-title mb-0" href="#">
-    <div class="logo-wrapper">
-      <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo" class="logo left">
-      <img src="CABECERA_PARCHE_15_nuevo.jpeg" alt="Real Madrid Patch" class="logo right">
-      
-    </div>
-  </a>
-</div>
-
 <style>
-.logo-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  overflow: hidden;
-}
+    #rmlogo-wrapper {
+      max-width: 100%;
+      margin: 0;
+      overflow: hidden;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-start; /* 👈 Logo ke kiri */
+    }
 
-/* Logo dasar */
-.logo {
-  height: 40px;
-  opacity: 0;
-  position: relative;
-  animation-duration: 10s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
+    #rmlogo-wrapper .rmlogo-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+    }
 
-/* Logo kiri */
-.logo.left {
-  animation-name: logoLeft;
-}
+    #rmlogo-wrapper .rmlogo-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+    }
 
-/* Logo kanan */
-.logo.right {
-  animation-name: logoRight;
-}
+    #rmlogo-wrapper .rmlogo-logo {
+      height: 40px;
+      opacity: 0;
+      animation-duration: 10s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      position: relative;
+    }
 
-/* Muncul 0-20% (2 detik), Stay 20-60% (4 detik), Keluar 60-80% (2 detik) */
-@keyframes logoLeft {
-  0%   { transform: translateX(-150%); opacity: 0; }
-  20%  { transform: translateX(0); opacity: 1; }
-  60%  { transform: translateX(0); opacity: 1; }
-  80%  { transform: translateX(-150%); opacity: 0; }
-  100% { transform: translateX(-150%); opacity: 0; }
-}
+    #rmlogo-wrapper .rmlogo-left   { animation-name: rmlogoUpDownLeft; }
+    #rmlogo-wrapper .rmlogo-center { animation-name: rmlogoUpDownCenter; }
+    #rmlogo-wrapper .rmlogo-right  { animation-name: rmlogoUpDownRight; }
 
-@keyframes logoRight {
-  0%   { transform: translateX(150%); opacity: 0; }
-  20%  { transform: translateX(0); opacity: 1; }
-  60%  { transform: translateX(0); opacity: 1; }
-  80%  { transform: translateX(150%); opacity: 0; }
-  100% { transform: translateX(150%); opacity: 0; }
-}
+    #rmlogo-wrapper .rmlogo-separator {
+      width: 1px;
+      height: 40px;
+      background-color: #ccc;
+      opacity: 0;
+      animation-duration: 10s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
 
-/* Kilauan */
-.logo::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.7) 50%,
-    rgba(255,255,255,0) 100%
-  );
-  animation: shimmer 2.5s linear infinite;
-  pointer-events: none;
-}
+    #rmlogo-wrapper .rmlogo-sep1 { animation-name: rmlogoUpDownLeft; }
+    #rmlogo-wrapper .rmlogo-sep2 { animation-name: rmlogoUpDownCenter; }
 
-@keyframes shimmer {
-  0%   { left: -100%; }
-  100% { left: 100%; }
-}
-</style>
+    @keyframes rmlogoUpDownLeft {
+      0%   { transform: translateY(150%); opacity: 0; }
+      15%  { transform: translateY(0); opacity: 1; }
+      45%  { transform: translateY(0); opacity: 1; }
+      65%  { transform: translateY(150%); opacity: 0; }
+      100% { transform: translateY(150%); opacity: 0; }
+    }
+
+    @keyframes rmlogoUpDownCenter {
+      0%   { transform: translateY(150%); opacity: 0; }
+      20%  { transform: translateY(0); opacity: 1; }
+      50%  { transform: translateY(0); opacity: 1; }
+      70%  { transform: translateY(150%); opacity: 0; }
+      100% { transform: translateY(150%); opacity: 0; }
+    }
+
+    @keyframes rmlogoUpDownRight {
+      0%   { transform: translateY(150%); opacity: 0; }
+      25%  { transform: translateY(0); opacity: 1; }
+      55%  { transform: translateY(0); opacity: 1; }
+      75%  { transform: translateY(150%); opacity: 0; }
+      100% { transform: translateY(150%); opacity: 0; }
+    }
+
+    #rmlogo-wrapper .rmlogo-logo::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.7) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      animation: rmlogoShimmer 2.5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rmlogoShimmer {
+      0%   { left: -100%; }
+      100% { left: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="rmlogo-wrapper">
+    <div class="rmlogo-wrapper">
+
+      <!-- Logo 1 -->
+      <div class="rmlogo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"
+             alt="Real Madrid Logo"
+             class="rmlogo-logo rmlogo-left">
+      </div>
+
+      <!-- Separator -->
+      <div class="rmlogo-separator rmlogo-sep1"></div>
+
+      <!-- Logo 2 -->
+      <div class="rmlogo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/2025_FIFA_Club_World_Cup.svg/400px-2025_FIFA_Club_World_Cup.svg.png?20241105184725"
+             alt="La Liga Logo"
+             class="rmlogo-logo rmlogo-center">
+      </div>
+
+      <!-- Separator -->
+      <div class="rmlogo-separator rmlogo-sep2"></div>
+
+      <!-- Logo 3 -->
+      <div class="rmlogo-container">
+        <img src="CABECERA_PARCHE_15_nuevo.jpeg"
+             alt="Real Madrid Patch"
+             class="rmlogo-logo rmlogo-right">
+      </div>
+
+    </div>
+  </div>
 
 
         </header>
