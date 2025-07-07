@@ -14,9 +14,14 @@
     </head>
     <body>
         <!--=============== HEADER ===============-->
+
+        
         
         <header class="header" id="header">
             <nav class="nav container">
+
+
+              
                 
                <a href="#" class="nav__logo">
   <img src="saaa.png"
@@ -84,7 +89,11 @@
 </style>
 
 
+
+
                 <div class="nav__menu" id="nav-menu">
+
+                  
                   
                     <ul class="nav__list">
                       
@@ -112,8 +121,14 @@
                     <i class='bx bx-grid-alt'></i>
                 </div>
 
+
+                
                 <a href="#" class="button button__header">WELLCOME</a>
             </nav>
+
+
+
+            
             
 <div class="container">
   <a class="link-dark navbar-brand site-title mb-0" href="#">
@@ -239,7 +254,7 @@
 }
 </style>
 
-
+<br>
 
         </header>
 
@@ -955,7 +970,7 @@ various programming languages and technologies and im is madridista.</span>
     trackName.textContent = tracks[index].name;
     audio.load();
     audio.play();
-    playBtn.textContent = '⏸';
+    playBtn.textContent = '||';
   }
 
   function togglePlayPause() {
@@ -1012,6 +1027,7 @@ various programming languages and technologies and im is madridista.</span>
       audio.pause();
     }
   });
+  loadTrack(currentTrack);
 </script>
 
 
@@ -1255,6 +1271,7 @@ various programming languages and technologies and im is madridista.</span>
       document.body.style.overflow = '';
     }, 600);
   }, 5000); // total delay ~5s
+  
 </script>
 
 
